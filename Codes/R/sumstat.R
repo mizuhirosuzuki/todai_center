@@ -66,7 +66,7 @@ map(
   as.matrix() %>% 
   set_colnames(NULL) %>% 
   set_rownames(c(
-    "Admission share (%)",
+    "Matriculation share (%)",
     "Temperature (degree C)",
     "Hourly precipitation (mm)",
     "Hourly snowfall (m)",

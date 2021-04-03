@@ -87,7 +87,7 @@ res_5 <- felm(
 
 list(res_1, res_2, res_3, res_4, res_5) %>% 
   stargazer(
-    dep.var.labels = "Admission share (\\%)",
+    dep.var.labels = "Matriculation share (\\%)",
     covariate.labels = c(
       "Temperature (degree C)",
       "Temperature $\\le$ 0",
@@ -148,7 +148,7 @@ res_5 <- felm(
 
 list(res_1, res_2, res_3, res_4, res_5) %>% 
   stargazer(
-    dep.var.labels = "Admission share (\\%)",
+    dep.var.labels = "Matriculation share (\\%)",
     column.labels = c(rep("Morning", 2), rep("During-exam", 2)),
     order = c(seq(1, 4), seq(8, 11), seq(5, 7), seq(12, 14)),
     covariate.labels = c(
@@ -207,7 +207,7 @@ res_4 <- felm(
 
 list(res_1, res_2, res_3, res_4) %>% 
   stargazer(
-    dep.var.labels = "Admission share (\\%)",
+    dep.var.labels = "Matriculation share (\\%)",
     covariate.labels = c(
       "Temperature (degree C)",
       "Temperature $\\le$ 0",
@@ -353,5 +353,5 @@ reg_df %>%
   table()
 
 reg_df %>% 
-  select(exam_temperature_degree, morning_temperature_degree) %>% 
-  summary()
+  dplyr::select(morning_cum_snow_m, exam_cum_snow_m) %>% 
+  cor()
