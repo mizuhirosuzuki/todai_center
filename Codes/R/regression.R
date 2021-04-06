@@ -16,8 +16,14 @@ git_dir <- "~/Documents/GitHub/todai_center/"
 # Load admission information =================
 admission_df <- read_csv(file.path(dropbox_dir, "Data/admission_data.csv"))
 
-# Load weather information on exam days=================
+# Load weather information on exam days =================
 weather_exam_df <- read_csv(file.path(dropbox_dir, "Data/temp/weather_on_exam_day.csv"))
+
+# Load weather information on exam days (1 year lag) =================
+weather_l1_df <- read_csv(file.path(dropbox_dir, "Data/temp/weather_l1.csv"))
+
+# Load weather information on exam days (1 year lead) =================
+weather_f1_df <- read_csv(file.path(dropbox_dir, "Data/temp/weather_f1.csv"))
 
 # Load weather information (previous 10 days) =================
 weather_pre10_df <- read_csv(file.path(dropbox_dir, "Data/temp/weather_pre10.csv"))
@@ -34,6 +40,18 @@ reg_df <- left_join(
     summarise_all(mean),
   by = c("prefecture", "year" = "exam_year")
   ) %>% 
+  left_join(
+    weather_l1_df %>% 
+      group_by(prefecture, exam_year) %>% 
+      summarise_all(mean),
+    by = c("prefecture", "year" = "exam_year")
+  ) %>% 
+  left_join(
+    weather_f1_df %>% 
+      group_by(prefecture, exam_year) %>% 
+      summarise_all(mean),
+    by = c("prefecture", "year" = "exam_year")
+  ) %>% 
   left_join(weather_pre10_df, by = c("prefecture", "year" = "exam_year")) %>% 
   left_join(weather_pre_oct_dec_df, by = c("prefecture", "year" = "exam_year")) %>% 
   mutate(
@@ -41,6 +59,14 @@ reg_df <- left_join(
     temp_cut = relevel(as.factor(temp_cut), ref = 3),
     daytime_snowfall_m = daytime_snowfall_cm / 100,
     daytime_cum_snow_m = daytime_cum_snow_cm / 100,
+    l1_temp_cut = cut(l1_temperature_degree, c(-10, 0, 3, 6, 9, 25)),
+    l1_temp_cut = relevel(as.factor(l1_temp_cut), ref = 3),
+    l1_snowfall_m = l1_snowfall_cm / 100,
+    l1_cum_snow_m = l1_cum_snow_cm / 100,
+    f1_temp_cut = cut(f1_temperature_degree, c(-10, 0, 3, 6, 9, 25)),
+    f1_temp_cut = relevel(as.factor(f1_temp_cut), ref = 3),
+    f1_snowfall_m = f1_snowfall_cm / 100,
+    f1_cum_snow_m = f1_cum_snow_cm / 100,
     temp_cut_pre10 = cut(temperature_pre10_avg, c(-10, 0, 3, 6, 9, 30)),
     temp_cut_pre10 = relevel(as.factor(temp_cut_pre10), ref = 3),
     snowfall_pre10_m = snowfall_pre10 / 100,
@@ -55,6 +81,82 @@ reg_df <- left_join(
     morning_cum_snow_m = morning_cum_snow_cm / 100
     )
 
+reg_df %>% 
+  mutate(
+    # temp_cut = cut(daytime_temperature_degree, c(-10, 1, 3, 5, 7, 25)),
+    temp_cut = cut(daytime_temperature_degree, c(-10, 0, 3, 6, 9, 25)),
+    temp_cut_morning = cut(morning_temperature_degree, c(-10, -2, 0, 2, 4, 6, 25)),
+    temp_cut_exam = cut(exam_temperature_degree, c(-10, 0, 3, 6, 9, 25)),
+    l1_temp_cut = cut(l1_temperature_degree, c(-10, 0, 2, 4, 6, 8, 25)),
+    f1_temp_cut = cut(f1_temperature_degree, c(-10, 0, 2, 4, 6, 8, 25))
+    # temp_cut = relevel(as.factor(temp_cut), ref = 3),
+    ) %>%
+  # filter(year <= 2018) %>%
+  # select(year, temp_cut) %>%
+  # select(temp_cut) %>%
+  # select(year, f1_temp_cut) %>%
+  # select(f1_temp_cut) %>%
+  # select(year, l1_temp_cut) %>%
+  # select(l1_temp_cut) %>%
+  # select(year, temp_cut_morning) %>%
+  # select(temp_cut_morning) %>%
+  select(year, temp_cut_exam) %>%
+  select(temp_cut_exam) %>%
+  table()
+
+felm(
+  admission_total_share ~ 
+    temp_cut |
+    prefecture + year | 0 | prefecture, 
+  data = reg_df %>% 
+    mutate(
+      temp_cut = cut(daytime_temperature_degree, c(-10, 0, 3, 6, 9, 25)),
+      temp_cut = cut(daytime_temperature_degree, c(-10, 0, 2, 4, 6, 8, 25)),
+      temp_cut = relevel(temp_cut, ref = 3),
+      temp_cut_morning = cut(morning_temperature_degree, c(-10, -2, 0, 2, 4, 6, 25)),
+      temp_cut_exam = cut(exam_temperature_degree, c(-10, 0, 2, 4, 6, 25)),
+    )
+  ) %>% summary
+
+felm(
+  admission_total_share ~ 
+    temp_cut |
+    prefecture + year | 0 | prefecture, 
+  data = reg_df %>% 
+    mutate(
+      # temp_cut = cut(daytime_temperature_degree, c(-10, 0, 3, 6, 9, 25)),
+      temp_cut = cut(daytime_temperature_degree, c(-10, 0, 3, 6, 9, 25)),
+      temp_cut_morning = cut(morning_temperature_degree, c(-10, -3, 0, 3, 6, 25)),
+      temp_cut_exam = cut(exam_temperature_degree, c(-10, 0, 3, 6, 9, 25)),
+    )
+  ) %>% 
+  car::linearHypothesis(
+    c(
+      rownames(.$coefficients)[str_detect(rownames(.$coefficients), "temp_cut")]
+    ),
+    test = "F"
+  )
+
+a <- lm(admission_total_share ~ factor(prefecture) + factor(year), data = reg_df)
+b <- lm(daytime_temperature_degree ~ factor(prefecture) + factor(year), data = reg_df)
+reg_df %>% 
+  mutate(
+    resid_y = (lm(admission_total_share ~ factor(prefecture) + factor(year), data = reg_df))$residuals, 
+    resid_x = (lm(daytime_temperature_degree ~ factor(prefecture) + factor(year), data = reg_df))$residuals
+    ) %>% 
+  ggplot(aes(x = resid_x, y = resid_y)) +
+  geom_smooth()
+
+res
+
+car::linearHypothesis(
+  res,
+  rownames(res$coefficients)[str_detect(rownames(res$coefficients), "temp_cut")]
+)
+
+
+# Main regression ==========================
+
 res_1 <- felm(
   admission_total_share ~ daytime_temperature_degree | 
     prefecture + year | 0 | prefecture, 
@@ -68,24 +170,36 @@ res_2 <- felm(
   )
 
 res_3 <- felm(
-  admission_total_share ~ daytime_temperature_degree + daytime_precipitation_mm + daytime_snowfall_m + daytime_cum_snow_m | 
+  admission_total_share ~ daytime_temperature_degree + daytime_precipitation_mm + daytime_snowfall_m | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
   )
 
 res_4 <- felm(
-  admission_total_share ~ temp_cut + daytime_precipitation_mm + daytime_snowfall_m + daytime_cum_snow_m | 
+  admission_total_share ~ temp_cut + daytime_precipitation_mm + daytime_snowfall_m | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
 res_5 <- felm(
-  admission_total_share ~ temp_cut + daytime_precipitation_mm + daytime_snowfall_m + factor(daytime_cum_snow_m > .1) | 
+  admission_total_share ~ daytime_temperature_degree + daytime_precipitation_mm + daytime_cum_snow_m | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+  )
+
+res_6 <- felm(
+  admission_total_share ~ temp_cut + daytime_precipitation_mm + daytime_cum_snow_m | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
-list(res_1, res_2, res_3, res_4, res_5) %>% 
+res_7 <- felm(
+  admission_total_share ~ temp_cut + daytime_precipitation_mm + factor(daytime_cum_snow_m > .1) | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+)
+
+list(res_1, res_2, res_3, res_4, res_5, res_6, res_7) %>% 
   stargazer(
     dep.var.labels = "Matriculation share (\\%)",
     covariate.labels = c(
@@ -101,8 +215,8 @@ list(res_1, res_2, res_3, res_4, res_5) %>%
     ),
     title = "",
     add.lines = list(
-      c("Prefecture FE", rep("Yes", 5)),
-      c("Year FE", rep("Yes", 5))
+      c("Prefecture FE", rep("Yes", 7)),
+      c("Year FE", rep("Yes", 7))
     ),
     type = "latex",
     out = file.path(git_dir, "Output/tex/main_reg.tex"),
@@ -115,41 +229,49 @@ list(res_1, res_2, res_3, res_4, res_5) %>%
 # Regression with weather in the morning and during the exams =====================
 
 res_1 <- felm(
-  admission_total_share ~ temp_cut_morning | 
+  admission_total_share ~ temp_cut_morning + morning_precipitation_mm + morning_snowfall_m |
     prefecture + year | 0 | prefecture, 
   data = reg_df
   )
 
 res_2 <- felm(
-  admission_total_share ~ temp_cut_morning + morning_precipitation_mm + morning_snowfall_m + morning_cum_snow_m |
+  admission_total_share ~ temp_cut_morning + morning_precipitation_mm + morning_cum_snow_m |
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
 res_3 <- felm(
-  admission_total_share ~ temp_cut_exam | 
+  admission_total_share ~ temp_cut_exam + exam_precipitation_mm + exam_snowfall_m | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
   )
 
 res_4 <- felm(
-  admission_total_share ~ temp_cut_exam + exam_precipitation_mm + exam_snowfall_m + exam_cum_snow_m | 
+  admission_total_share ~ temp_cut_exam + exam_precipitation_mm + exam_cum_snow_m | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
 res_5 <- felm(
   admission_total_share ~ 
-    temp_cut_morning + morning_precipitation_mm + morning_snowfall_m + morning_cum_snow_m +
-    temp_cut_exam + exam_precipitation_mm + exam_snowfall_m + exam_cum_snow_m | 
+    temp_cut_morning + morning_precipitation_mm + morning_snowfall_m +
+    temp_cut_exam + exam_precipitation_mm + exam_snowfall_m | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
-list(res_1, res_2, res_3, res_4, res_5) %>% 
+res_6 <- felm(
+  admission_total_share ~ 
+    temp_cut_morning + morning_precipitation_mm + morning_cum_snow_m +
+    temp_cut_exam + exam_precipitation_mm + exam_cum_snow_m | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+)
+
+list(res_1, res_2, res_3, res_4, res_5, res_6) %>% 
   stargazer(
     dep.var.labels = "Matriculation share (\\%)",
-    column.labels = c(rep("Morning", 2), rep("During-exam", 2)),
+    # column.labels = c(rep("Morning", 2), rep("During-exam", 2)),
     order = c(seq(1, 4), seq(8, 11), seq(5, 7), seq(12, 14)),
     covariate.labels = c(
       "Temperature (morning) $\\le$ -3",
@@ -158,7 +280,7 @@ list(res_1, res_2, res_3, res_4, res_5) %>%
       "Temperature (morning) $>$ 6",
       "Temperature (during-exam) $\\le$ 0",
       "Temperature (during-exam) $>$ 0, $\\le$ 3",
-      "Temperature (during-exam) $>$ 3, $\\le$ 6",
+      "Temperature (during-exam) $>$ 6, $\\le$ 9",
       "Temperature (during-exam) $>$ 9",
       "Rainfall (mm) (morning)",
       "Snowfall (m) (morning)",
@@ -169,8 +291,8 @@ list(res_1, res_2, res_3, res_4, res_5) %>%
     ),
     title = "",
     add.lines = list(
-      c("Prefecture FE", rep("Yes", 5)),
-      c("Year FE", rep("Yes", 5))
+      c("Prefecture FE", rep("Yes", 6)),
+      c("Year FE", rep("Yes", 6))
     ),
     type = "latex",
     out = file.path(git_dir, "Output/tex/reg_morning_exam.tex"),
@@ -194,18 +316,30 @@ res_2 <- felm(
   )
 
 res_3 <- felm(
-  admission_total_share ~ temperature_pre10_avg + precipitation_pre10_sum + snowfall_pre10 + cum_snow_pre10 | 
+  admission_total_share ~ temperature_pre10_avg + precipitation_pre10_sum + snowfall_pre10_m | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
   )
 
 res_4 <- felm(
-  admission_total_share ~ temp_cut_pre10 + precipitation_pre10_sum + snowfall_pre10 + cum_snow_pre10 | 
+  admission_total_share ~ temp_cut_pre10 + precipitation_pre10_sum + snowfall_pre10_m | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
-list(res_1, res_2, res_3, res_4) %>% 
+res_5 <- felm(
+  admission_total_share ~ temperature_pre10_avg + precipitation_pre10_sum + cum_snow_pre10_m | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+  )
+
+res_6 <- felm(
+  admission_total_share ~ temp_cut_pre10 + precipitation_pre10_sum + cum_snow_pre10_m | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+)
+
+list(res_1, res_2, res_3, res_4, res_5, res_6) %>% 
   stargazer(
     dep.var.labels = "Matriculation share (\\%)",
     covariate.labels = c(
@@ -220,8 +354,8 @@ list(res_1, res_2, res_3, res_4) %>%
     ),
     title = "",
     add.lines = list(
-      c("Prefecture FE", rep("Yes", 5)),
-      c("Year FE", rep("Yes", 5))
+      c("Prefecture FE", rep("Yes", 6)),
+      c("Year FE", rep("Yes", 6))
     ),
     type = "latex",
     out = file.path(git_dir, "Output/tex/reg_pre10.tex"),
@@ -230,17 +364,129 @@ list(res_1, res_2, res_3, res_4) %>%
     float = FALSE
   )
 
+reg_df$cum_snow_pre10_m %>% sd
+0.12 * 0.19
+
+# Regression by male and female matriculations =====================
+
+res_1 <- felm(
+  admission_female_share ~ temp_cut + daytime_precipitation_mm + daytime_snowfall_m | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+  )
+
+res_2 <- felm(
+  admission_female_share ~ temp_cut + daytime_precipitation_mm + daytime_cum_snow_m | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+)
+
+res_3 <- felm(
+  admission_male_share ~ temp_cut + daytime_precipitation_mm + daytime_snowfall_m | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+  )
+
+res_4 <- felm(
+  admission_male_share ~ temp_cut + daytime_precipitation_mm + daytime_cum_snow_m | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+)
+
+list(res_1, res_2, res_3, res_4) %>% 
+  stargazer(
+    dep.var.labels = c("Matriculation share (\\%, female)", "Matriculation share (\\%, male)"),
+    covariate.labels = c(
+      "Temperature $\\le$ 0",
+      "Temperature $>$ 0, $\\le$ 3",
+      "Temperature $>$ 6, $\\le$ 9",
+      "Temperature $>$ 9",
+      "Rainfall (mm)",
+      "Snowfall (m)",
+      "Cumulated snow (m)",
+      "Cumulated snow $>$ .10 m"
+    ),
+    title = "",
+    add.lines = list(
+      c("Prefecture FE", rep("Yes", 4)),
+      c("Year FE", rep("Yes", 4))
+    ),
+    type = "latex",
+    out = file.path(git_dir, "Output/tex/reg_by_gender.tex"),
+    omit.stat = c("adj.rsq", "ser", "rsq"),
+    digits = 2,
+    float = FALSE
+  )
+
+# Regression with weather (lag and lead) =====================
+
+res_1 <- felm(
+  admission_total_share ~ f1_temp_cut + f1_precipitation_mm + f1_snowfall_m |
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+  )
+
+res_2 <- felm(
+  admission_total_share ~ f1_temp_cut + f1_precipitation_mm + f1_cum_snow_m |
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+)
+
+res_3 <- felm(
+  admission_total_share ~ 
+    temp_cut + daytime_precipitation_mm + daytime_snowfall_m +
+    f1_temp_cut + f1_precipitation_mm + f1_snowfall_m |
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+)
+
+res_4 <- felm(
+  admission_total_share ~ 
+    temp_cut + daytime_precipitation_mm + daytime_cum_snow_m +
+    f1_temp_cut + f1_precipitation_mm + f1_cum_snow_m |
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+)
+
+list(res_1, res_2, res_3, res_4) %>% 
+  stargazer(
+    dep.var.labels = "Matriculation share (\\%)",
+    order = c(seq(1, 4), seq(5, 7), seq(8, 11), seq(12, 14)),
+    covariate.labels = c(
+      "Temperature ($t$) $\\le$ 0",
+      "Temperature ($t$) $>$ 0, $\\le$ 3",
+      "Temperature ($t$) $>$ 6, $\\le$ 9",
+      "Temperature ($t$) $>$ 9",
+      "Rainfall (mm) ($t$)",
+      "Snowfall (m) ($t$)",
+      "Cumulated snow (m) ($t$)",
+      "Temperature ($t + 1$) $\\le$ 0",
+      "Temperature ($t + 1$) $>$ 0, $\\le$ 3",
+      "Temperature ($t + 1$) $>$ 6, $\\le$ 9",
+      "Temperature ($t + 1$) $>$ 9",
+      "Rainfall (mm) ($t + 1$)",
+      "Snowfall (m) ($t + 1$)",
+      "Cumulated snow (m) ($t + 1$)"
+    ),
+    title = "",
+    add.lines = list(
+      c("Prefecture FE", rep("Yes", 5)),
+      c("Year FE", rep("Yes", 5))
+    ),
+    type = "latex",
+    out = file.path(git_dir, "Output/tex/reg_placebo_exam.tex"),
+    omit.stat = c("adj.rsq", "ser", "rsq"),
+    digits = 2,
+    float = FALSE
+  )
+
 # Regression with weather on two days =====================
 
-weather_df %>% 
-  dplyr::select(starts_with("daytime_"), exam_first_second, prefecture, exam_year) %>% 
-  pivot_wider(names_from = exam_first_second, values_from = starts_with("daytime_"))
-
-reg_df <- left_join(
+reg_df_td <- left_join(
   admission_df,
-  weather_df %>% 
-    dplyr::select(starts_with("daytime_"), exam_first_second, prefecture, exam_year) %>% 
-    pivot_wider(names_from = exam_first_second, values_from = starts_with("daytime_")),
+  weather_exam_df %>% 
+    dplyr::select(starts_with("daytime_"), starts_with("morning_"), exam_first_second, prefecture, exam_year) %>% 
+    pivot_wider(names_from = exam_first_second, values_from = c(starts_with("daytime_"), starts_with("morning_"))),
   by = c("prefecture", "year" = "exam_year")
   ) %>% 
   mutate(
@@ -257,13 +503,13 @@ reg_df <- left_join(
 res_1 <- felm(
   admission_total_share ~ daytime_temperature_degree_1 + daytime_temperature_degree_2 | 
     prefecture + year | 0 | prefecture, 
-  data = reg_df
+  data = reg_df_td
   )
 
 res_2 <- felm(
   admission_total_share ~ temp_cut_1 + temp_cut_2 | 
     prefecture + year | 0 | prefecture, 
-  data = reg_df
+  data = reg_df_td
   )
 
 res_3 <- felm(
@@ -272,7 +518,7 @@ res_3 <- felm(
     daytime_temperature_degree_2 + daytime_precipitation_mm_2 + daytime_snowfall_m_2 + daytime_cum_snow_m_2
     | 
     prefecture + year | 0 | prefecture, 
-  data = reg_df
+  data = reg_df_td
   )
 
 res_4 <- felm(
@@ -280,78 +526,8 @@ res_4 <- felm(
     temp_cut_1 + daytime_precipitation_mm_1 + daytime_snowfall_m_1 + daytime_cum_snow_m_1 +
     temp_cut_2 + daytime_precipitation_mm_2 + daytime_snowfall_m_2 + daytime_cum_snow_m_2 |
     prefecture + year | 0 | prefecture, 
-  data = reg_df
+  data = reg_df_td
 )
 
 
 
-
-felm(
-  admission_total_share ~ temp_cut + temperature_daily_average_10 + temperature_daily_average_11 + temperature_daily_average_12 | 
-    prefecture + year | 0 | prefecture, 
-  data = reg_df
-  ) %>% 
-  summary()
-
-felm(
-  admission_total_share ~ temp_cut + daytime_cum_snow_m + snowfall_sum_avg |
-    prefecture + year | 0 | prefecture, 
-  data = reg_df %>% 
-    mutate(
-      temp_avg_cut = cut(temperature_daily_average_10, c(-2, 14, 17, 20, 30)),
-      temp_avgcut = relevel(as.factor(temp_avg_cut), ref = 3)
-    )
-  ) %>% 
-  summary()
-
-felm(
-  admission_total_share ~ temp_cut + temp_avg_cut |
-    prefecture + year | 0 | prefecture, 
-  data = reg_df %>% 
-    mutate(
-      temp_avg_cut = cut(temperature_daily_average_12, c(-5, 3, 6, 9, 30)),
-      temp_avgcut = relevel(as.factor(temp_avg_cut), ref = 3)
-    )
-  ) %>% 
-  summary()
-
-
-felm(
-  admission_total_share ~ morning_temperature_degree + exam_temperature_degree | 
-    prefecture + year | 0 | prefecture, 
-  data = reg_df %>% 
-    mutate(
-      temp_cut_morning = cut(morning_temperature_degree, c(-10, 0, 3, 6, 9, 30)),
-      temp_cut_exam = cut(exam_temperature_degree, c(-10, 0, 3, 6, 9, 30))
-      )
-  ) %>% 
-  summary()
-
-felm(
-  # admission_total_share ~ relevel(factor(temp_cut_morning), ref = 3) + relevel(factor(temp_cut_exam), ref = 4) |
-  admission_total_share ~ relevel(factor(temp_cut_morning), ref = 3) |
-  # admission_total_share ~ relevel(factor(temp_cut_exam), ref = 4) |
-    prefecture + year | 0 | prefecture, 
-  data = reg_df %>% 
-    mutate(
-      temp_cut_morning = cut(morning_temperature_degree, c(-10, -3, 0, 3, 6, 30)),
-      temp_cut_exam = cut(exam_temperature_degree, c(-10, 0, 3, 6, 9, 30))
-      )
-  ) %>% 
-  summary()
-
-reg_df %>% 
-  ggplot(aes(x = morning_temperature_degree)) +
-  geom_histogram()
-
-reg_df %>% 
-    mutate(
-      temp_cut_morning = cut(morning_temperature_degree, c(-10, -3, 0, 2, 4, 6, 30)),
-      temp_cut_exam = cut(exam_temperature_degree, c(-10, 0, 3, 6, 9, 30))
-      ) %>% 
-  .$temp_cut_exam %>% 
-  table()
-
-reg_df %>% 
-  dplyr::select(morning_cum_snow_m, exam_cum_snow_m) %>% 
-  cor()
