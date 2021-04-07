@@ -339,6 +339,10 @@ res_6 <- felm(
   data = reg_df
 )
 
+reg_df %>% 
+  select(daytime_temperature_degree, temperature_pre10_avg) %>% 
+  cor()
+
 list(res_1, res_2, res_3, res_4, res_5, res_6) %>% 
   stargazer(
     dep.var.labels = "Matriculation share (\\%)",
