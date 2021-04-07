@@ -56,7 +56,7 @@ To understand the effect, emerging literature has studied effects of high temper
 What has been less studied in the literature is the economic impact of \textit{low} temperature.
 Given the possibility that the sea-ice loss, partly due to climate change, results in cold winters with severely low temperatures \citep{Kretschmer2016, Kim2014}, it is important to understand how low temperature can affect our economies and lives.
 
-This study analyzes the effect of winter weathers on exam outcomes in Japan.
+This study analyzes the effect of winter weather on exam outcomes in Japan.
 For admission, most public universities in Japan require high school seniors and graduates to take a centralized test, called National Center Test for University Admission (Center Test henceforth).
 Students take the exam on the same dates in mid-January in their prefectures.\footnote{
   There are 47 prefectures in Japan.
@@ -174,14 +174,11 @@ For weather information, I obtain data from \Citeauthor{jma}.
 Their website maintains the past weather across Japan.
 Based on hourly weather on exam dates at prefecture capitals, I use average weather between 6 AM to 6 PM.
 Prefecture capitals tend to be most populated in each prefecture, and highly-ranked high schools from which many students go to UTokyo are likely to be located at prefecture capitals.
-%\footnote{
-%  According to inter-edu, \url{https://www.inter-edu.com/univ/2019/jisseki/todai/ranking/}
-%}
 
 For matriculation information for UTokyo, I use University Basic Information by \Citeauthor{univ_info}.
 This data contains information from 2012 to 2020 on the number of matriculated students for each university by prefectures at which their high schools are located.
 I calculate the matriculation shares of each prefecture as the ratio of the number of matriculated students from a prefecture to the number of all matriculated students.\footnote{
-  Ideally, the information on admission rather than matriculation should be used since matriculation depends on exam scores and the decision to go to the university or not.
+  %Ideally, the information on admission rather than matriculation should be used since matriculation depends on exam scores and the decision to go to the university or not.
   Due to the lack of information on the number of admitted students by prefecture, I use the information on matriculation.
   For UTokyo, the number of admissions and the number of matriculations are very close:
   In 2020, among 3,083 admitted students, 3,064 students matriculated at UTokyo.
@@ -280,7 +277,7 @@ The primary reason for this to happen is that a senior student at a high school 
 I consider that, conditional on prefecture fixed effects, the measurement error is likely to be uncorrelated with the error term.
 Hence, this classical measurement error can make the estimates conservative.
 Another potential concern is that, as discussed in footnote \ref{footnote:prefecture}, students in several municipalities in a prefecture could take Center Test in a neighboring prefecture.
-Since neighboring prefectures are geographically close, I consider that the effect of this measurement error on estimates is not large.
+Since neighboring prefectures are geographically close, I consider that this measurement error is not large.
 
 %\begin{figure}[H]
 %  \centering
@@ -344,8 +341,8 @@ This suggests that the negative impacts of low temperature found in Table \ref{t
 In Table \ref{tab:reg_pre10}, the coefficients on snowfall and cumulated snow on the ground are statistically significant.
 Combined with the finding in Table \ref{tab:main_reg} that cumulated snow on the ground on the exam dates decreases students' performance, two potential explanations can be given:
 (i) snow before the exams can adversely affect students' preparation, and
-(ii) snowfall before the exams cumulates snow on the grdound and students' performance is affected by the cumulated snow on the exam dates.
-Due to high collinearity of cumulated snow on the exam dates and 10 days before the exams, I cannot identify which mechanism is dominant.
+(ii) snowfall before the exams cumulates snow on the ground and students' performance is affected by the cumulated snow on the exam dates.
+Due to the high correlation of cumulated snow on the exam dates and 10 days before the exams, I cannot identify which mechanism is dominant.
 
 %\begin{table}[H]
 %  \center
@@ -372,7 +369,7 @@ This study fills the gap and identifies the causal impact of winter weather on m
 
 The results show both economically and statistically significant impacts of low temperature and cumulated snow on the ground on the exam dates.
 Changing the temperature from 3-6 $^o$C to below 0 $^o$C decreases the matriculation share of a prefecture by 0.18 percentage point, which is 9\% of the mean matriculation share, or 22\% of the median matriculation share.
-Moreover, having more than 10cm of snow on the ground decreases the share by 0.13 percentage point.
+Moreover, having more than 10cm of snow on the ground decreases the share by 0.11 percentage point.
 
 The results have implications for the admission process of universities.
 Recognizing the limitation to measure students' cognitive ability through an exam affected by external factors such as weather, universities may use other measures to select students.
