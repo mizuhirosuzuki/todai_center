@@ -309,11 +309,11 @@ Therefore, the same temperature change decreases the matriculation share by 22\%
 Also, the plateau effect of temperature above 6 $^o$C could be the reason why the linear specification in column (1) could not capture the non-linear effect of temperature and why the coefficient is statistically insignificant.
 Although for a quite different temperature range, similar plateau effects are found in \citet{Park2020a}.
 
-In columns (3) and (4), I add other weather variables.
-While temperature coefficients are barely affected, I find that rainfall and snowfall during exam time do not impact the matriculation shares.
-On the other hand, the cumulated snow on the ground has a negative impact.
-To capture the effect of the existence of a certain amount of snow on the ground, column (5) allows a non-linear effect of cumulated snow.
-The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 inches) decreases the matriculation share by 0.13 percentage point.\footnote{
+In columns (3) and (4), I add rainfall and snowfall in the regressions.
+While temperature coefficients are barely affected, I find that rainfall and snowfall on the exam dates do not impact the matriculation shares.
+In columns (5) and (6), instead of snowfall on the exam dates, I use cumulated snow on the ground and find its negative impact on the outcome. 
+To capture the effect of the existence of a certain amount of snow on the ground, column (7) allows a non-linear effect of cumulated snow.
+The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 inches) decreases the matriculation share by 0.11 percentage point.\footnote{
   Following the falsification test in \citet{Cho2017}, I check if weather variables one year after the actual Center Test affect the matriculation shares.
   The results in Table \ref{tab:reg_placebo_exam} show not only that the weather one year after Center Test has insignificant impacts on matriculation shares but also including the weather variables one year after Center Test barely change the coefficients on contemporaneous weather variables.
 }
@@ -336,16 +336,16 @@ The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 
 One possible interpretation of the results is that the temperature on exam dates captures the weather before the exam due to the serial correlation.
 In other words, the effects found in Table \ref{tab:main_reg} could be interpreted as the effects on preparation for the exam. 
 For instance, cold weather can make it hard for students to focus on studying, suggested by existing studies \citep{Taylor2016}.
-%Also, snowfall can prevent students from going to schools or cram schools for studying.
+Also, snowfall can prevent students from going to schools or cram schools for studying.
 To investigate this possibility, I use the average weather variables for 10 days before the exams and run regressions.
 The results in Table \ref{tab:reg_pre10} show statistically insignificant estimates for temperature variables.
-This suggests that the negative impacts of low temperature found in Table \ref{tab:main_reg} are caused by the temperature on exam dates rather than temperature before exams.\footnote{
-  Notice that the coefficients on snowfall and cumulated snow on the ground are statistically significant.
-  Combined with the finding in Table \ref{tab:main_reg} that cumulated snow on the ground on the exam dates decreases students' performance, two potential explanations can be given:
-  (i) snow before the exams adversely can affect students' preparation, and
-  (ii) snowfall before the exams cumulates snow on the grdound and students' performance is affected by the cumulated snow on the exam dates.
-  Due to high collinearity of cumulated snow on the exam dates and 10 days before the exams, it is difficult to parse out these two mechanisms.
-}
+This suggests that the negative impacts of low temperature found in Table \ref{tab:main_reg} are caused by the temperature on exam dates rather than temperature before exams.
+
+In Table \ref{tab:reg_pre10}, the coefficients on snowfall and cumulated snow on the ground are statistically significant.
+Combined with the finding in Table \ref{tab:main_reg} that cumulated snow on the ground on the exam dates decreases students' performance, two potential explanations can be given:
+(i) snow before the exams can adversely affect students' preparation, and
+(ii) snowfall before the exams cumulates snow on the grdound and students' performance is affected by the cumulated snow on the exam dates.
+Due to high collinearity of cumulated snow on the exam dates and 10 days before the exams, I cannot identify which mechanism is dominant.
 
 %\begin{table}[H]
 %  \center
