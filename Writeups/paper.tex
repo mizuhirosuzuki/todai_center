@@ -126,48 +126,22 @@ For the affected students, the following accommodations can be provided:
 (iii) allowing the affected students to take make-up exams a week later.
 These accommodations can be given to students who could not take exams for other reasons such as sickness or accidents.
 
-%Exam takers do not receive their scores until the next May at earliest.
-%However, they can record their answers on their exam booklets and can bring them back home.
-%Hence, they know their scores by comparing their own answers and correct answers, which are made public through newspapers or websites of cram schools.
-%After taking Center Test, students apply for public and private universities.\footnote{
-%  There are private universities who accept applications before Center Test.
-%}
-%Applicants for public universities typically take the second-stage exam.
-
 After Center Test, applicants for public universities typically take the second-stage exam.
 This exam is made by each university, and students physically go to the universities and take the exam.
 Therefore, every applicant for a university takes the second-stage exam at the same location on the same days.
 UTokyo has the second-stage exam at the end of February for two days.\footnote{
   Until 2015, UTokyo had another second-stage exam in March and a small number of exam takers got admitted through the exam (around 3\% of all admitted students).
-%  Most of the admissions were provided for exam takers in February:
-%  In 2015, among 3,108 admitted students, only 100 exam takers in March got admitted.
   In 2016, UTokyo abolished the March exam and instead started to admit the small number of students recommended by their high schools based on interviews and scores at Center Test (around 2\% of all admitted students).
   Since the majority of students are admitted through the second-stage exam in February, below I focus on the admission process for those students. 
 }
 
-%Most public universities, including UTokyo, have three periods for the second-stage exam:
-%usually, the first one is at the end of February, the second one is on the first week of March, and the third one is on the second week of March.
-%Students can apply for only one university at each exam period.
-%While different universities accept applications for different periods, most universities have only one (typically the first period) or two (typically the first and the third periods) periods.
-%Up to 2015, UTokyo had two exam periods, the first and the third ones, although most of the admissions were provided for exam takers at the first exam period.\footnote{
-%  In 2015, while 3,008 students got admitted through the first-period exam, only 100 students got admitted through the third-period exam.
-%  % https://www.u-tokyo.ac.jp/ja/about/overview/e08_01_h27.html
-%}
-%In 2016, UTokyo abolished the third-period exam and instead started to admit the small number of students recommended by their high schools based on interviews and scores at Center Test.
-%In the latter process, students take interviews in November before Center Test, and after taking Center Test, final admissions are determined based on the results both of interviews and scores at Center Test.\footnote{
-%  In 2020, among 3,083 admitted students, only 73 students got admitted through this process.
-%  % https://www.u-tokyo.ac.jp/ja/about/overview/e08_01.html
-%}
-
 In admission for UTokyo, scores at Center Test are used for two purposes.
 First, the scores are used for eligibility to take the second-stage exam.
 Thresholds varying across years and majors are set, and if scores at Center Test are below the thresholds, the students cannot take the second-stage exam.
-%Since the thresholds are announced after the application, exam takers do not know if their scores are above or below the thresholds.
 Secondly, the scores at Center Test are taken into consideration for admission.
 The final score of a student is calculated by the weighted sum of exam scores at the first- and second-stage exams.\footnote{
   In 2020, the weights for Center Test and the second-stage exam are 20\% and 80\%.
   Faculty of Medicine additionally conducts interviews on the next day of the second-stage exam to screen applicants based on community skills and personal maturity.
-  %Also, until 2015, for the third-period exam takers, scores at Center Test were used only for eligibility and were not accounted for the final admission.
 }
 
 In summary, results at Center Test are crucial for applicants for UTokyo.
@@ -184,55 +158,51 @@ Prefecture capitals tend to be most populated in each prefecture, and highly-ran
 For matriculation information for UTokyo, I use University Basic Information by \Citeauthor{univ_info}.
 This data contains information from 2012 to 2020 on the number of matriculated students for each university by prefectures at which their high schools are located.
 I calculate the matriculation shares of each prefecture as the ratio of the number of matriculated students from a prefecture to the number of all matriculated students.\footnote{
-  %Ideally, the information on admission rather than matriculation should be used since matriculation depends on exam scores and the decision to go to the university or not.
   Due to the lack of information on the number of admitted students by prefecture, I use the information on matriculation.
   For UTokyo, the number of admissions and the number of matriculations are very close:
   In 2020, among 3,083 admitted students, 3,064 students matriculated at UTokyo.
-  %Moreover, it is unlikely that weathers on exam dates affect decisions of admitted students to matriculate or not.
 }
 
 The summary statistics are provided in Table \ref{tab:sum_stat}.
 Whereas the mean matriculation share is $2.08 \%$, the median share is much smaller ($0.79 \%$).\footnote{
   Since there are matriculations from foreign high schools, the mean value does not coincide with $1 / 47 \approx 2.12\%$.
-  %I do not consider matriculations from foreign high schools in the analyses since I do not know where the students take Center Test.
-  %Also, the majority of the students from foreign high schools are admitted mostly based on interviews and essays.
   I do not consider matriculations of students from foreign high schools in the analyses since the majority of the students are admitted through a process called Special Screening Tests, which does not require Center Test scores.
 }
 This is because the distribution of the matriculation share is starkly skewed:
 while the matriculation shares of the top 5 prefectures amount to more than 60\%, many prefectures have less than 1\% shares (Figure \ref{fig:admission_map}).
 
 
-%\begin{table}[H]
-%  \centering
-%  \caption{Summary Statistics}
-%  \resizebox{0.8\linewidth}{!}{
-%  \input{"../Output/tex/sum_stat.tex"}
-%  }
-%  \label{tab:sum_stat}
-%  \footnotesize
-%  \begin{tablenotes}
-%    \item 
-%      Notes:
-%      Matriculation share (\%) is the share of newly matriculated students to the University of Tokyo from each prefecture.
-%      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-%      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
-%  \end{tablenotes}
-%\end{table}
+\begin{table}[H]
+  \centering
+  \caption{Summary Statistics}
+  \resizebox{0.8\linewidth}{!}{
+  \input{"../Output/tex/sum_stat.tex"}
+  }
+  \label{tab:sum_stat}
+  \footnotesize
+  \begin{tablenotes}
+    \item 
+      Notes:
+      Matriculation share (\%) is the share of newly matriculated students to the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+  \end{tablenotes}
+\end{table}
 
-%\begin{figure}[H]
-%  \centering
-%  \caption{Map of matriculation shares (\%)}
-%  \includegraphics[width = 0.7\textwidth]{../Output/images/admission_map.png}
-%  \label{fig:admission_map}
-%  \footnotesize
-%  \begin{tablenotes}
-%    \item Notes:
-%      This map shows the matriculation shares (\%) for the University of Tokyo from each prefecture.
-%      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-%      Average of the shares across years is shown in the map.
-%      Although not shown in the legend due to the lack of the space, the lightest color in the map means the matriculation share between 0 to 0.5\% 
-%  \end{tablenotes}
-%\end{figure}
+\begin{figure}[H]
+  \centering
+  \caption{Map of matriculation shares (\%)}
+  \includegraphics[width = 0.7\textwidth]{../Output/images/admission_map.png}
+  \label{fig:admission_map}
+  \footnotesize
+  \begin{tablenotes}
+    \item Notes:
+      This map shows the matriculation shares (\%) for the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      Average of the shares across years is shown in the map.
+      Although not shown in the legend due to the lack of the space, the lightest color in the map means the matriculation share between 0 to 0.5\% 
+  \end{tablenotes}
+\end{figure}
 
 \section{Empirical Strategy}\label{sec:empirical_strategy}
 
@@ -247,10 +217,6 @@ Hence, the matriculation share of the prefecture for the middle-ranked universit
 However, the second effect is unlikely to be large for UTokyo since it is known to be the best university in Japan.\footnote{
   \citet{Kawaguchi2008} describes that ``The University of Tokyo has occupied the top position of the single-peaked university hierarchy since its establishment in 1877.''
 }
-%Secondly, since UTokyo is a national university, the tuition is cheaper than most private universities.\footnote{
-%  According to \citet{mext}, in 2018, the annual tuition for national universities was 538,633 JPY ($\approx$ 4,900 USD), while the average annual tuition for private university was 904,146 ($\approx$ 8,200 USD).
-%  %https://www.mext.go.jp/a_menu/koutou/shinkou/07021403/1412031_00001.htm
-%}
 Therefore, I rule out the second possibility and attribute a reduction in matriculation shares to the worse performance at Center Test.
 
 In the analyses, the outcome variable, $Y_{jt}$, is the matriculation share (\%) for UTokyo of a prefecture $j$ in year $t$.
@@ -279,27 +245,24 @@ This means that, for these students, the weather at the exam sites is measured w
 The primary reason for this to happen is that a senior student at a high school located at a prefecture different from his home prefecture fails to get into any university and retake Center Test next year in his home prefecture.
 In 2020, 38\% of the admitted students are high-school graduates.
 Moreover, in the same year, according to the School Basic Survey, the share of high-school students from junior high schools in different prefectures was 3.9\% \citep{eStat}.
-%Hence, if I assume that that this number corresponds to the share of high-school students whose hometowns are in different prefectures, I obtain a rough estimate of the share of the high-school graduates whose high schools and hometowns are in different prefectures as $0.40 * 0.039 = 1.6\%$. 
 Hence, if I use this number as an approximation for the share of high-school students whose hometowns are in different prefectures, I obtain a rough estimate of the share of students whose exam-date weather is measured with errors for the reason above as $0.38 * 0.039 = 1.5\%$. 
 Given this small proportion of exam takers who are susceptible to the measurement error, I consider that the bias on the estimates is negligible.
-%I consider that, conditional on prefecture fixed effects, the measurement error (i.e. the difference in temperatures on the exam dates between the exam prefecture and home prefecture) is likely to be uncorrelated with the error term.
-%Hence, this classical measurement error can make the estimates conservative.
 Another potential concern is that, as discussed in footnote \ref{footnote:prefecture}, students in several municipalities in a prefecture could take Center Test in a neighboring prefecture.
 Since neighboring prefectures are geographically close, I consider that the magnitude of the measurement error is small.
 
-%\begin{figure}[H]
-%  \centering
-%  \caption{Average temperature on two exam dates in each prefecture each year}
-%  \includegraphics[width = 0.9\textwidth]{../Output/images/temperature_diff.pdf}
-%  \label{fig:temperature_diff}
-%  \footnotesize
-%  \begin{tablenotes}
-%    \item Notes:
-%      Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
-%      Average across two test days in each year is shown in the figure.
-%      Prefectures positioned to the left on the x-axis are located at more northern parts of Japan.
-%  \end{tablenotes}
-%\end{figure}
+\begin{figure}[H]
+  \centering
+  \caption{Average temperature on two exam dates in each prefecture each year}
+  \includegraphics[width = 0.9\textwidth]{../Output/images/temperature_diff.pdf}
+  \label{fig:temperature_diff}
+  \footnotesize
+  \begin{tablenotes}
+    \item Notes:
+      Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
+      Average across two test days in each year is shown in the figure.
+      Prefectures positioned to the left on the x-axis are located at more northern parts of Japan.
+  \end{tablenotes}
+\end{figure}
 
 \section{Results}\label{sec:results}
 
@@ -323,20 +286,20 @@ The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 
   The results in Table \ref{tab:reg_placebo_exam} show not only that the weather one year after Center Test has insignificant impacts on matriculation shares but also including the weather variables one year after Center Test barely changes the coefficients on contemporaneous weather variables.
 }
 
-%\begin{table}[H]
-%  \center
-%  \caption{Regression: Matriculation share (\%) and weather on exam dates}
-%  \input{"../Output/tex/main_reg.tex"}
-%  \label{tab:main_reg}
-%  \small
-%  \begin{tablenotes}
-%    \item
-%      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
-%      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-%      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
-%      Standard errors are clustered at the prefecture level.
-%  \end{tablenotes}
-%\end{table}
+\begin{table}[H]
+  \center
+  \caption{Regression: Matriculation share (\%) and weather on exam dates}
+  \input{"../Output/tex/main_reg.tex"}
+  \label{tab:main_reg}
+  \small
+  \begin{tablenotes}
+    \item
+      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+      Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{table}
 
 One possible interpretation of the results is that the temperature on exam dates captures the weather before the exam due to the serial correlation.
 In other words, the effects found in Table \ref{tab:main_reg} could be interpreted as the effects on preparation for the exam. 
@@ -352,26 +315,25 @@ Combined with the finding in Table \ref{tab:main_reg} that cumulated snow on the
 (ii) snowfall before the exams cumulates snow on the ground and students' performance is negatively affected by the cumulated snow on the exam dates.
 Due to the high correlation of cumulated snow on the exam dates and 10 days before the exams, I cannot identify which mechanism is dominant.
 
-%\begin{table}[H]
-%  \center
-%  \caption{Regression: Matriculation share (\%) and average weather for 10 days before exam}
-%  \input{"../Output/tex/reg_pre10.tex"}
-%  \label{tab:reg_pre10}
-%  \small
-%  \begin{tablenotes}
-%    \item
-%      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
-%      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-%      I use average weather variables at prefecture capitals between 10 days before and 1 day before the first day of Center Test.
-%      Standard errors are clustered at the prefecture level.
-%  \end{tablenotes}
-%\end{table}
+\begin{table}[H]
+  \center
+  \caption{Regression: Matriculation share (\%) and average weather for 10 days before exam}
+  \input{"../Output/tex/reg_pre10.tex"}
+  \label{tab:reg_pre10}
+  \small
+  \begin{tablenotes}
+    \item
+      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      I use average weather variables at prefecture capitals between 10 days before and 1 day before the first day of Center Test.
+      Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{table}
 
 \section{Conclusion}\label{sec:conclusion}
 
 This paper studies the impact of winter weather on cognitive performance on a high-stakes exam in Japan.
 I use the matriculation share for the most prestigious university in Japan, the University of Tokyo.
-%To identify the causal impact, I exploit the variation in weathers at each prefecture on exam dates.
 Most of the existing studies in the literature have focused on the effect of heat on cognitive performance, while the impact of cold weather remains largely unknown.
 This study fills the gap and identifies the causal impact of winter weather on matriculation.
 
@@ -391,86 +353,86 @@ Given the importance of exam results for later life outcomes of students, it is 
 \bibliographystyle{apalike}
 \bibliography{todai}
 
-\section{Figures}
-
-\begin{figure}[H]
-  \centering
-  \caption{Map of matriculation shares (\%)}
-  \includegraphics[width = 0.7\textwidth]{../Output/images/admission_map.png}
-  \label{fig:admission_map}
-  \footnotesize
-  \begin{tablenotes}
-    \item Notes:
-      This map shows the matriculation shares (\%) for the University of Tokyo from each prefecture.
-      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-      Average of the shares across years is shown in the map.
-      Although not shown in the legend due to the lack of the space, the lightest color in the map means the matriculation share between 0 to 0.5\% 
-  \end{tablenotes}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \caption{Average temperature on two exam dates in each prefecture each year}
-  \includegraphics[width = 0.9\textwidth]{../Output/images/temperature_diff.pdf}
-  \label{fig:temperature_diff}
-  \footnotesize
-  \begin{tablenotes}
-    \item Notes:
-      Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
-      Average across two test days in each year is shown in the figure.
-      Prefectures positioned to the left on the x-axis are located at more northern parts of Japan.
-  \end{tablenotes}
-\end{figure}
-
-\section{Tables}
-
-\begin{table}[H]
-  \centering
-  \caption{Summary Statistics}
-  \resizebox{0.8\linewidth}{!}{
-  \input{"../Output/tex/sum_stat.tex"}
-  }
-  \label{tab:sum_stat}
-  \footnotesize
-  \begin{tablenotes}
-    \item 
-      Notes:
-      Matriculation share (\%) is the share of newly matriculated students to the University of Tokyo from each prefecture.
-      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
-  \end{tablenotes}
-\end{table}
-
-\begin{table}[H]
-  \center
-  \caption{Regression: Matriculation share (\%) and weather on exam dates}
-  \small
-  \input{"../Output/tex/main_reg.tex"}
-  \label{tab:main_reg}
-  \small
-  \begin{tablenotes}
-    \item
-      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
-      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
-      Standard errors are clustered at the prefecture level.
-  \end{tablenotes}
-\end{table}
-
-\begin{table}[H]
-  \center
-  \caption{Regression: Matriculation share (\%) and average weather for 10 days before exam}
-  \input{"../Output/tex/reg_pre10.tex"}
-  \label{tab:reg_pre10}
-  \small
-  \begin{tablenotes}
-    \item
-      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
-      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-      I use average weather variables at prefecture capitals between 10 days before and 1 day before the first day of Center Test.
-      Standard errors are clustered at the prefecture level.
-  \end{tablenotes}
-\end{table}
+%\section{Figures}
+%
+%\begin{figure}[H]
+%  \centering
+%  \caption{Map of matriculation shares (\%)}
+%  \includegraphics[width = 0.7\textwidth]{../Output/images/admission_map.png}
+%  \label{fig:admission_map}
+%  \footnotesize
+%  \begin{tablenotes}
+%    \item Notes:
+%      This map shows the matriculation shares (\%) for the University of Tokyo from each prefecture.
+%      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+%      Average of the shares across years is shown in the map.
+%      Although not shown in the legend due to the lack of the space, the lightest color in the map means the matriculation share between 0 to 0.5\% 
+%  \end{tablenotes}
+%\end{figure}
+%
+%\begin{figure}[H]
+%  \centering
+%  \caption{Average temperature on two exam dates in each prefecture each year}
+%  \includegraphics[width = 0.9\textwidth]{../Output/images/temperature_diff.pdf}
+%  \label{fig:temperature_diff}
+%  \footnotesize
+%  \begin{tablenotes}
+%    \item Notes:
+%      Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
+%      Average across two test days in each year is shown in the figure.
+%      Prefectures positioned to the left on the x-axis are located at more northern parts of Japan.
+%  \end{tablenotes}
+%\end{figure}
+%
+%\section{Tables}
+%
+%\begin{table}[H]
+%  \centering
+%  \caption{Summary Statistics}
+%  \resizebox{0.8\linewidth}{!}{
+%  \input{"../Output/tex/sum_stat.tex"}
+%  }
+%  \label{tab:sum_stat}
+%  \footnotesize
+%  \begin{tablenotes}
+%    \item 
+%      Notes:
+%      Matriculation share (\%) is the share of newly matriculated students to the University of Tokyo from each prefecture.
+%      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+%      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+%  \end{tablenotes}
+%\end{table}
+%
+%\begin{table}[H]
+%  \center
+%  \caption{Regression: Matriculation share (\%) and weather on exam dates}
+%  \small
+%  \input{"../Output/tex/main_reg.tex"}
+%  \label{tab:main_reg}
+%  \small
+%  \begin{tablenotes}
+%    \item
+%      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+%      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+%      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+%      Standard errors are clustered at the prefecture level.
+%  \end{tablenotes}
+%\end{table}
+%
+%\begin{table}[H]
+%  \center
+%  \caption{Regression: Matriculation share (\%) and average weather for 10 days before exam}
+%  \input{"../Output/tex/reg_pre10.tex"}
+%  \label{tab:reg_pre10}
+%  \small
+%  \begin{tablenotes}
+%    \item
+%      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+%      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+%      I use average weather variables at prefecture capitals between 10 days before and 1 day before the first day of Center Test.
+%      Standard errors are clustered at the prefecture level.
+%  \end{tablenotes}
+%\end{table}
 
 \appendix
 
