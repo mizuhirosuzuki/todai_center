@@ -339,10 +339,6 @@ res_6 <- felm(
   data = reg_df
 )
 
-reg_df %>% 
-  select(daytime_temperature_degree, temperature_pre10_avg) %>% 
-  cor()
-
 list(res_1, res_2, res_3, res_4, res_5, res_6) %>% 
   stargazer(
     dep.var.labels = "Matriculation share (\\%)",
@@ -367,9 +363,6 @@ list(res_1, res_2, res_3, res_4, res_5, res_6) %>%
     digits = 2,
     float = FALSE
   )
-
-reg_df$cum_snow_pre10_m %>% sd
-0.12 * 0.19
 
 # Regression by male and female matriculations =====================
 
