@@ -192,7 +192,36 @@ write_csv(
   file.path(dropbox_dir, "Data/temp/weather_pre_oct_dec.csv")
 )
 
+# Summer weather ====================
+# Load data
+weather_summer_df <- read_csv(file.path(dropbox_dir, "Data/weather_summer/all_weather_summer.csv"))
 
+temp_cut <- c(-10, 18, 20, 22, 24, 26, 28, 30, 50)
+temp_max_cut <- c(-10, 22, 24, 26, 28, 30, 32, 34, 50)
+weather_summer_output <- weather_summer_df %>% 
+  mutate(
+    temp_group = cut(
+      temperature_avg_degree, 
+      breaks = temp_cut,
+      labels = paste0("temp_group_", seq(length(temp_cut) - 1))
+      ),
+    temp_max_group = cut(
+      temperature_max_degree, 
+      breaks = temp_max_cut,
+      labels = paste0("temp_max_group_", seq(length(temp_max_cut) - 1))
+      ),
+    ) %>% 
+  mutate(value = 1) %>% 
+  spread(temp_group, value, fill = 0) %>% 
+  mutate(value = 1) %>% 
+  spread(temp_max_group, value, fill = 0) %>% 
+  group_by(year, prefecture) %>% 
+  summarise_at(vars(starts_with("temp_")), sum, na.rm = TRUE)
+
+write_csv(
+  weather_summer_output,
+  file.path(dropbox_dir, "Data/temp/weather_summer.csv")
+)
 
 
 

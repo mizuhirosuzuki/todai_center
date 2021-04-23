@@ -66,13 +66,13 @@ map(
   as.matrix() %>% 
   set_colnames(NULL) %>% 
   set_rownames(c(
-    "Matriculation share (%)",
-    "Temperature (degree C)",
+    "Matriculation share (\\%)",
+    "Temperature (\\degree C)",
     "Hourly precipitation (mm)",
     "Hourly snowfall (m)",
     "Cumulated snow (m)"
   )) %>% 
-  kbl("latex", booktabs = TRUE) %>% 
+  kbl("latex", booktabs = TRUE, escape = FALSE) %>% 
   add_header_above(
     c(" ", "N", "Mean", "SD", "Median", "Min", "Max")
   ) %>% 

@@ -526,6 +526,130 @@ write_csv(
   file.path(dropbox_dir, "Data/weather_day/", "all_weather_day.csv")
   )
 
+# Download daily weather in the previous summer -----------------------
+
+get_summer_weather <- function(loc_i, year_month) {
+  
+  year <- year_month[[1]]
+  month <- year_month[[2]]
+
+  if (i %in% c(11)) {
+    
+    html_data <- read_html(
+      paste0(
+        "https://www.data.jma.go.jp/obd/stats/etrn/view/daily_a1.php?prec_no=",
+        loc_i$prec_no, "&block_no=", loc_i$block_no,
+        "&year=", as.character(year - 1), 
+        str_interp("&month=${month}"), "&day=1", "&view="
+        )
+    )
+    # Sys.sleep(runif(1, max = 10))
+  
+    html_table <- html_data %>% 
+      html_nodes("table") %>% 
+      .[6] %>% 
+      html_table(fill = TRUE) %>% 
+      .[[1]] %>% 
+      set_colnames(
+        c(
+          "day", 
+          "precipitation_sum_mm",  "precipitation_max_hour_mm",  "precipitation_max_10min_mm", 
+          "temperature_avg_degree", "temperature_max_degree", "temperature_min_degree",
+          "wind_speed_avg", "wind_speed_max", "wind_direction_max", 
+          "wind_speed_max_max", "wind_direction_max_max", "wind_direction_most_frequent",
+          "sunny_time", "snowfall_cm", "cum_snow_cm"
+          )
+        ) %>% 
+      as_tibble() %>% 
+      slice(- c(1, 2)) %>% 
+      mutate(
+        across(
+          .fns = as.numeric
+        )
+      )
+    
+  } else {
+    
+    html_data <- read_html(
+      paste0(
+        "https://www.data.jma.go.jp/obd/stats/etrn/view/daily_s1.php?prec_no=",
+        loc_i$prec_no, "&block_no=", loc_i$block_no,
+        "&year=", as.character(year - 1), 
+        str_interp("&month=${month}"), "&day=1", "&view="
+        )
+    )
+    # Sys.sleep(runif(1, min = 20, max = 40))
+  
+    html_table <- html_data %>% 
+      html_nodes("table") %>% 
+      .[6] %>% 
+      html_table(fill = TRUE) %>% 
+      .[[1]] %>% 
+      set_colnames(
+        c(
+          "day", "airpressure_local", "airpressure_sea",
+          "precipitation_sum_mm",  "precipitation_max_hour_mm",  "precipitation_max_10min_mm", 
+          "temperature_avg_degree", "temperature_max_degree", "temperature_min_degree",
+          "humidity_avg", "humidity_min",
+          "wind_speed_avg", "wind_speed_max", "wind_direction_max", 
+          "wind_speed_max_max", "wind_direction_max_max", 
+          "sunny_time", "snowfall_cm", "cum_snow_cm",
+          "weather_daytime",  "weather_night"
+          )
+        ) %>% 
+      as_tibble() %>% 
+      slice(-c(1, 2, 3)) %>% 
+      mutate(
+        across(
+          .fns = as.numeric
+        )
+      )
+  }
+  
+  html_output <- html_table %>% 
+    select(day, precipitation_sum_mm, temperature_avg_degree, temperature_max_degree, snowfall_cm, cum_snow_cm) %>% 
+    mutate(year = year, month = month, prefecture = loc_i$prefecture)
+
+  return(html_output)
+}
+
+for (i in seq(nrow(loc_df))) {
+  
+  print(i)
+  
+  loc_i <- loc_df %>% slice(i)
+  
+  weather_summer_output <- map(cross2(seq(2012, 2020), seq(5, 9)), ~ get_summer_weather(loc_i, .)) %>% 
+    bind_rows()
+  
+  write_csv(
+    weather_summer_output, 
+    file.path(dropbox_dir, paste0("Data/weather_summer/", i, "_weather_summer.csv"))
+    )
+  
+  Sys.sleep(runif(1, min = 20, max = 40))
+  
+}
+
+weather_summer_all <- map(
+  seq(nrow(loc_df)),
+  ~ read_csv(
+    file.path(dropbox_dir, paste0("Data/weather_summer/", ., "_weather_summer.csv"))
+    )
+  ) %>% 
+  bind_rows()
+  # mutate(
+  #   across(
+  #     .cols = where(is.numeric),
+  #     .fns = ~ replace_na(., 0)
+  #   )
+  # )
+
+write_csv(
+  weather_summer_all, 
+  file.path(dropbox_dir, "Data/weather_summer/", "all_weather_summer.csv")
+  )
+
 # Monthly weather ===========================
 # Download monthly weather on previous October, November, and December -----------------------
 

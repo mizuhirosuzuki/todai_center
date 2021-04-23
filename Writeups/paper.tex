@@ -39,9 +39,10 @@
     \noindent 
     Whereas there are growing numbers of studies on how heat affects cognitive performance at high-stakes settings, the effect of cold weather has been less studied.
     To fill this gap, I analyze the effects of winter weather on exam dates on performance at the centralized exam for university admission in Japan.
+    Since students take the exam in their own prefectures, they are exposed to different weather conditions on the exam dates. 
     I find that low temperature and snow cumulated on the ground reduce matriculation shares for the most prestigious university in Japan, the University of Tokyo.
     This result suggests that the winter weather on exam dates worsens exam performance. 
-    The implications on how to design university admissions are discussed.
+    %The implications on how to design university admissions are discussed.
 
   \medskip
   \vspace{1cm}
@@ -103,7 +104,7 @@ In Section \ref{sec:results}, I present the empirical results, and Section \ref{
 \section{Background}\label{sec:background}
 
 In Japan, for admission to public universities, students are usually required to take two exams.
-The first-stage test is called Center Test.
+The first-stage test is Center Test.
 Students take an exam on consecutive two days (Saturday and Sunday) in mid-January.
 Most public universities, including UTokyo, require students to take exams on social science, language, and English on the first day and mathematics and natural science on the second day.
 The exams start at 9:30 AM on both days and end at 6:10 PM on the first day and 5:50 PM on the second day.
@@ -252,7 +253,7 @@ Since neighboring prefectures are geographically close, I consider that the magn
 
 \begin{figure}[H]
   \centering
-  \caption{Average temperature on two exam dates in each prefecture each year}
+  \caption{Average temperature (\degree C) on two exam dates in each prefecture each year}
   \includegraphics[width = 0.9\textwidth]{../Output/images/temperature_diff.pdf}
   \label{fig:temperature_diff}
   \footnotesize
@@ -280,7 +281,7 @@ Although for a quite different temperature range, similar plateau effects are fo
 In columns (3) and (4), I add rainfall and snowfall in the regressions.
 While temperature coefficients are barely affected, I find that rainfall and snowfall on the exam dates do not impact the matriculation shares.
 In columns (5) and (6), instead of snowfall on the exam dates, I use cumulated snow on the ground and find its negative impact on the outcome. 
-To capture the effect of the existence of a certain amount of snow on the ground, column (7) allows a non-linear effect of cumulated snow.
+To capture the effect of the existence of a certain amount of snow on the ground, columns (7) and (8) allow a non-linear effect of cumulated snow.
 The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 inches) decreases the matriculation share by 0.11 percentage point.\footnote{
   Following the falsification test in \citet{Cho2017}, I check if weather variables one year after the actual Center Test affect the matriculation shares.
   The results in Table \ref{tab:reg_placebo_exam} show not only that the weather one year after Center Test has insignificant impacts on matriculation shares but also including the weather variables one year after Center Test barely changes the coefficients on contemporaneous weather variables.
@@ -289,6 +290,7 @@ The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 
 \begin{table}[H]
   \center
   \caption{Regression: Matriculation share (\%) and weather on exam dates}
+  \footnotesize
   \input{"../Output/tex/main_reg.tex"}
   \label{tab:main_reg}
   \small
@@ -304,28 +306,32 @@ The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 
 One possible interpretation of the results is that the temperature on exam dates captures the weather before the exam due to the serial correlation.
 In other words, the effects found in Table \ref{tab:main_reg} could be interpreted as the effects on preparation for the exam. 
 For instance, cold weather can make it hard for students to focus on studying, suggested by existing studies \citep{Taylor2016}.
-Also, snowfall can prevent students from going to schools or cram schools for studying.
+Also, snowfall can prevent students from going to high schools or cram schools for studying.
 To investigate this possibility, I use the average weather variables for 10 days before the exams and run regressions.
-The results in Table \ref{tab:reg_pre10} show statistically insignificant estimates for temperature variables.
-This suggests that the negative impacts of low temperature found in Table \ref{tab:main_reg} are caused by the temperature on exam dates rather than temperature before exams.
+The results in columns (1) and (2) in Table \ref{tab:reg_pre10} show statistically insignificant estimates for the temperature variables.
+Moreover, including the weather variables for 10 days before the exams barely changes the estimates on the weather variables on the exam dates (columns (3) and (4)).
+These suggest that the negative impacts of low temperature found in Table \ref{tab:main_reg} are mainly caused by the temperature on exam dates rather than temperature before exams.
 
-In Table \ref{tab:reg_pre10}, the coefficients on snowfall and cumulated snow on the ground are statistically significant.
+In columns (1) and (2), the coefficients on snowfall and cumulated snow on the ground are statistically significant.
 Combined with the finding in Table \ref{tab:main_reg} that cumulated snow on the ground on the exam dates decreases students' performance, two potential explanations can be given:
-(i) snow before the exams can adversely affect students' preparation, and
+(i) snow before the exams can adversely affect students' preparation due to, for instance, more difficulty in going to high schools or cram schools, and
 (ii) snowfall before the exams cumulates snow on the ground and students' performance is negatively affected by the cumulated snow on the exam dates.
-Due to the high correlation of cumulated snow on the exam dates and 10 days before the exams, I cannot identify which mechanism is dominant.
+Including the weather variables on the exam dates, columns (3) and (4) show that only cumulated snow on exam dates has significant impact on the outcome.
+This suggests that the second mechanism is dominant.
 
 \begin{table}[H]
   \center
   \caption{Regression: Matriculation share (\%) and average weather for 10 days before exam}
+  \scriptsize
   \input{"../Output/tex/reg_pre10.tex"}
   \label{tab:reg_pre10}
-  \small
+  \scriptsize
   \begin{tablenotes}
     \item
       The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
       The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-      I use average weather variables at prefecture capitals between 10 days before and 1 day before the first day of Center Test.
+      For weather variables with "(exam dates)", I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+      For weather variables with "(previous 10 days)", I use their averages at prefecture capitals between 10 days before and 1 day before the first day of Center Test.
       Standard errors are clustered at the prefecture level.
   \end{tablenotes}
 \end{table}
@@ -453,7 +459,7 @@ Given the importance of exam results for later life outcomes of students, it is 
     \item Notes:
       Rainfall (mm) at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
       Average across two test days in each year is shown in the figure.
-      Prefectures positioned to the left on the x-axis are located at more northern parts of Japan.
+      The prefectures are ordered by the mean rainfall across years (lowest to left and highest to right).
   \end{tablenotes}
 \end{figure}
 
@@ -467,7 +473,7 @@ Given the importance of exam results for later life outcomes of students, it is 
     \item Notes:
       Snowfall (m) at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
       Average across two test days in each year is shown in the figure.
-      Prefectures positioned to the left on the x-axis are located at more northern parts of Japan.
+      The prefectures are ordered by the mean snowfall across years (lowest to left and highest to right).
   \end{tablenotes}
 \end{figure}
 
@@ -481,7 +487,7 @@ Given the importance of exam results for later life outcomes of students, it is 
     \item Notes:
       Cumulated snow (m) at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
       Average across two test days in each year is shown in the figure.
-      Prefectures positioned to the left on the x-axis are located at more northern parts of Japan.
+      The prefectures are ordered by the mean cumulated snow across years (lowest to left and highest to right).
   \end{tablenotes}
 \end{figure}
 
@@ -496,7 +502,7 @@ Given the importance of exam results for later life outcomes of students, it is 
       Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
       Deviations of average temperatures across two test days from their within-prefecture means are shown in the figure by year.
       In each panel, red dots are the deviations in the year shown above and gray dots are the deviations in the other years.
-      Prefectures positioned to the left on the x-axis are located at more northern parts of Japan.
+      The prefectures are ordered by the mean temperature across years (lowest to left and highest to right).
   \end{tablenotes}
 \end{figure}
 

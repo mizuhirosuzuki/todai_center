@@ -37,6 +37,12 @@ weather_df_avg <- weather_df %>%
   mutate(prefecture = rev(factor(prefecture, levels = prefecture_order)))
 
 # Daytime temperature
+prefecture_order <- weather_df_avg %>% 
+  group_by(prefecture) %>% 
+  summarise_at(vars(daytime_temperature_degree), mean, na.rm = TRUE) %>% 
+  arrange(daytime_temperature_degree) %>% 
+  .$prefecture %>% 
+  as.vector()
 p <- weather_df_avg %>% 
   ggplot(aes(x = prefecture, y = daytime_temperature_degree, color = factor(exam_year))) +
   geom_point() +
@@ -67,6 +73,12 @@ ggsave(
 )
 
 # Deviations from within-prefecture means
+prefecture_order <- weather_df_avg %>% 
+  group_by(prefecture) %>% 
+  summarise_at(vars(daytime_temperature_degree), mean, na.rm = TRUE) %>% 
+  arrange(daytime_temperature_degree) %>% 
+  .$prefecture %>% 
+  as.vector()
 temp_diff_list <- map(
   seq(2012, 2020),
   function(x) weather_df_avg %>% 
@@ -114,9 +126,13 @@ ggsave(
   width = 10
 )
 
-
-
 # Daytime cumulated snow
+prefecture_order <- weather_df_avg %>% 
+  group_by(prefecture) %>% 
+  summarise_at(vars(daytime_cum_snow_m), mean, na.rm = TRUE) %>% 
+  arrange(daytime_cum_snow_m) %>% 
+  .$prefecture %>% 
+  as.vector()
 p <- weather_df_avg %>% 
   ggplot(aes(x = prefecture, y = daytime_cum_snow_m, color = factor(exam_year))) +
   geom_point() +
@@ -147,6 +163,12 @@ ggsave(
 )
 
 # Daytime snowfall
+prefecture_order <- weather_df_avg %>% 
+  group_by(prefecture) %>% 
+  summarise_at(vars(daytime_snowfall_m), mean, na.rm = TRUE) %>% 
+  arrange(daytime_snowfall_m) %>% 
+  .$prefecture %>% 
+  as.vector()
 p <- weather_df_avg %>% 
   ggplot(aes(x = prefecture, y = daytime_snowfall_m, color = factor(exam_year))) +
   geom_point() +
@@ -177,6 +199,12 @@ ggsave(
 )
 
 # Daytime rainfall
+prefecture_order <- weather_df_avg %>% 
+  group_by(prefecture) %>% 
+  summarise_at(vars(daytime_precipitation_mm), mean, na.rm = TRUE) %>% 
+  arrange(daytime_precipitation_mm) %>% 
+  .$prefecture %>% 
+  as.vector()
 p <- weather_df_avg %>% 
   ggplot(aes(x = prefecture, y = daytime_precipitation_mm, color = factor(exam_year))) +
   geom_point() +
