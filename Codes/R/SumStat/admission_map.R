@@ -48,8 +48,8 @@ map@data$ADM1_JA <- str_replace(map@data$ADM1_JA, "東京都", "東京")
 
 map_avg <- merge(map, admission_df_avg, by.x = "ADM1_JA", by.y = "prefecture")
 
-filepath = file.path(git_dir, 'Output/images/admission_map.png')
-png(file = filepath)
+filepath = file.path(git_dir, 'Output/images/admission_map.pdf')
+pdf(file = filepath)
 print(
   spplot(
     map_avg, 
@@ -72,8 +72,4 @@ print(
   )
 )
 dev.off()
-
-admission_df_avg %>% 
-  arrange(desc(admission_total_share)) %>% 
-  mutate(cum_admission = cumsum(admission_total_share))
 

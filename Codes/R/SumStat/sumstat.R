@@ -39,8 +39,8 @@ reg_df <- left_join(
 list(
   function(x) sum(!is.na(x)), 
   mean, sd, median, min, max
-) %>% 
-map(
+  ) %>% 
+  map(
   function(x) 
     reg_df %>% 
     dplyr::select(
@@ -78,4 +78,17 @@ map(
   ) %>% 
   save_kable(file.path(git_dir, "Output/tex/sum_stat.tex"))
 
-
+list(
+  function(x) sum(!is.na(x)), 
+  mean, sd, median, min, max
+  ) %>% 
+  map(
+  function(x) 
+    reg_df %>% 
+    dplyr::select(
+      admission_Arts_share,
+      admission_Sciences_share,
+      ) %>% 
+    summarise_all(x)
+  ) %>% 
+  bind_rows() 

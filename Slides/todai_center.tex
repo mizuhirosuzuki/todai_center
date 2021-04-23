@@ -1,0 +1,365 @@
+\documentclass[9pt, pdfmx,hiresbb]{beamer}
+\usepackage{natbib}
+\usepackage{bbm}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{appendixnumberbeamer}
+\usepackage{siunitx}
+\usepackage{lipsum}
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage{indentfirst}
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{graphicx}
+\usepackage{setspace} 
+
+\usepackage{color}  % https://dkumor.com/posts/technical/2018/08/15/causal-tikz/
+\usepackage{tikz}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+
+\newtheorem{prop}{Proposition} 
+\setbeamertemplate{thorems}[numbered]
+
+\setbeamerfont{page number in head/foot}{size=\scriptsize}
+\setbeamertemplate{footline}[frame number]
+
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+
+\newcommand\Wider[2][3em]{
+\makebox[\linewidth][c]{
+  \begin{minipage}{\dimexpr\textwidth+#1\relax}
+  \raggedright#2
+  \end{minipage}
+  }
+}
+
+%\usetheme{CambridgeUS}
+\setbeamertemplate{navigation symbols}{}
+\title[Temperature and Exam]{Temperature and Bureaucracy: \\ Empirical Analysis on Auditing Reports in Brazil}
+\author[Suzuki]{Mizuhiro Suzuki}
+\date{May 13th, 2021}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Background}
+\begin{frame}\frametitle{Roadmap}
+  \begin{itemize}
+    \item Background
+    \item Data
+    \item Empirical strategy
+    \item Results
+    \item (Some more results not in the paper for now)
+  \end{itemize}
+  \medskip
+  \begin{itemize}
+    \item Planning to submit the paper to JEEM short 
+    \item Max 3,000 words (but ``modestly longer papers will be considered'')
+    \item My paper now has 3,200 words
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Data}
+  \begin{itemize}
+    \item Weather information from Japan Meteorological Agency
+      \begin{itemize}
+        \item Hourly information on temperature, rainfall, snowfall, snow on the ground
+        \item I use average between 6 AM to 6 PM
+      \end{itemize}
+    \item Matriculation for UTokyo from University Basic Information
+      \begin{itemize}
+        \item Information from 2012 to 2020 on the number of matriculated students for each university by prefectures at which their high schools are located
+        \item I calculate the matriculation shares for UTokyo from a prefecture $j$ in year $t$ as 
+          \begin{equation*}
+            \frac{\text{\# matriculations for UTokyo from $j$ in year $t$}}{\text{\# total matriculations for UTokyo in year $t$}}
+          \end{equation*}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Summary Statistics}
+  \begin{center}
+    \begin{table}
+      \caption{Summary Statistics}
+      \footnotesize
+      \input{../Output/tex/sum_stat.tex}
+    \end{table}
+  \end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Map of matriculation shares (\%)}
+  \begin{center}
+    \begin{figure}
+      %\caption{Map of matriculation shares (\%)}
+      \includegraphics[width=7.5cm]{../Output/images/admission_map.pdf}
+      \tiny
+      \begin{tablenotes}
+      \item Notes:
+        This map shows the matriculation shares (\%) for the University of Tokyo from each prefecture.
+        The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+        Average of the shares across years is shown in the map.
+        Although not shown in the legend due to the lack of the space, the lightest color in the map means the matriculation share between 0 to 0.5\% 
+      \end{tablenotes}
+    \end{figure}
+  \end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Empirical Strategy}
+  \begin{equation*}
+    Y_{jt} = \sum_k \alpha_k T_{jt}^k + X_{jt}' \beta + \mu_j + \tau_t + \epsilon_{jt}.
+  \end{equation*}
+  \begin{itemize}
+    \item $Y_{jt}$: matriculation share (\%) for UTokyo of a prefecture $j$ in year $t$
+    \item $T_{jt}^k$: bin of average temperature across two exam dates in $j$ in year $t$
+    \item $X_{jt}$: other weather variables such as rainfall, snowfall, and cumulated snow on the ground on exam dates
+    \item $\mu_j$: prefecture fixed effects
+    \item $\tau_t$: year fixed effects
+    \item $\epsilon_{jt}$: error term
+    \item Standard errors are clustered at the prefecture level
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Temperature variations in each prefecture}
+  \begin{center}
+    \begin{figure}
+      %\caption{Map of matriculation shares (\%)}
+      \includegraphics[width=9.5cm]{../Output/images/temperature_diff.pdf}
+      \tiny
+      \begin{tablenotes}
+      \item Notes:
+        Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
+        Average across two test days in each year is shown in the figure.
+        The prefectures are ordered by the mean temperature across years (lowest to left and highest to right).
+      \end{tablenotes}
+    \end{figure}
+  \end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Deviation of temperatures from within-prefecture averages}
+  \begin{center}
+    \begin{figure}
+      %\caption{Map of matriculation shares (\%)}
+      \includegraphics[width=7.5cm]{../Output/images/temperature_diff_by_year.pdf}
+      \tiny
+      \begin{tablenotes}
+      \item Notes:
+        Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
+        Deviations of average temperatures across two test days from their within-prefecture means are shown in the figure by year.
+        In each panel, red dots are the deviations in the year shown above and gray dots are the deviations in the other years.
+        The prefectures are ordered by the mean temperature across years (lowest to left and highest to right).
+      \end{tablenotes}
+    \end{figure}
+  \end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Temperature effects on the matriculation shares (\%)}
+  \begin{center}
+    \begin{figure}
+      \includegraphics[width=6.5cm]{../Output/images/main_reg_2.pdf}
+      \tiny
+      \begin{tablenotes}
+      \item Notes:
+        The figure shows the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
+        I use temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+        Each interval on the x-axis does not include the right end.
+        The 90\% confidence intervals are shown.
+        Prefecture fixed effects and year fixed effects are also included.
+        Standard errors are clustered at the prefecture level.
+      \end{tablenotes}
+    \end{figure}
+  \end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Effects of other weather variables on the matriculation shares (\%)}
+    \begin{table}[h]
+      \Wider[4em]{
+      \center
+      \fontsize{6}{8}\selectfont
+      \input{../Output/tex/main_reg_beamer.tex}
+      \tiny
+      \begin{tablenotes}
+      \item 
+        The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+        The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+        I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+        Standard errors are clustered at the prefecture level.
+      \end{tablenotes}
+    }
+    \end{table}
+\end{frame}
+
+\begin{frame}\frametitle{Placebo test (including temperature one year after the exams)}
+  \begin{minipage}{0.49\textwidth}
+    \begin{center}
+      Contemporaneous temperature
+    \end{center}
+    \begin{figure}[h]
+      \centering
+      \includegraphics[width = \textwidth]{../Output/images/reg_placebo_exam_4.pdf}
+    \end{figure}
+  \end{minipage}
+  \begin{minipage}{0.49\textwidth}
+    \begin{center}
+      Temperature one year later
+    \end{center}
+    \begin{figure}[h]
+      \includegraphics[width = \textwidth]{../Output/images/reg_placebo_f1_4.pdf}
+      \centering
+    \end{figure}
+  \end{minipage}
+  \tiny
+  \begin{tablenotes}
+  \item Notes;
+    The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
+    In the left figure, the estimates on the contemporaneous temperature bins are shown.
+    In the right figure, the estimates on the temperature one year later are shown.
+    Rainfall and cumulated snow on the ground (both contemporaneous and one year later) are included in the regression.
+    Each interval on the x-axis does not include the right end.
+    The 90\% confidence intervals are shown.
+    Prefecture fixed effects and year fixed effects are also included.
+    Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{frame}
+
+\begin{frame}\frametitle{Cognitive performance at the exam vs. Preparation}
+  \begin{minipage}{0.49\textwidth}
+    \begin{center}
+      Temperature at the exam dates
+    \end{center}
+    \begin{figure}[h]
+      \centering
+      \includegraphics[width = \textwidth]{../Output/images/reg_pre10_exam_4.pdf}
+    \end{figure}
+  \end{minipage}
+  \begin{minipage}{0.49\textwidth}
+    \begin{center}
+      Average temperature for 10 days before the exam
+    \end{center}
+    \begin{figure}[h]
+      \includegraphics[width = \textwidth]{../Output/images/reg_pre10_pre10_4.pdf}
+      \centering
+    \end{figure}
+  \end{minipage}
+  \tiny
+  \begin{tablenotes}
+  \item Notes;
+    The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
+    In the left figure, the estimates on the temperature on the exam dates are shown.
+    In the right figure, the estimates on the average temperature for 10 days before the exam are shown.
+    Rainfall and cumulated snow on the ground (both on the exam days and average for 10 days before the exam) are included in the regression.
+    Each interval on the x-axis does not include the right end.
+    The 90\% confidence intervals are shown.
+    Prefecture fixed effects and year fixed effects are also included.
+    Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{frame}
+
+\begin{frame}\frametitle{Effects of other weather variables on the matriculation shares (\%)}
+  \begin{table}[h]
+    \Wider[4em]{
+    \center
+    \fontsize{6}{7}\selectfont
+    \input{../Output/tex/reg_pre10_beamer.tex}
+    \tiny
+    \begin{tablenotes}
+    \item 
+      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      Standard errors are clustered at the prefecture level.
+    \end{tablenotes}
+  }
+  \end{table}
+\end{frame}
+
+\begin{frame}\frametitle{Female vs. Male}
+  \begin{minipage}{0.49\textwidth}
+    \begin{center}
+      Female \\
+      (mean: 0.38 \%, median: 0.13 \%)
+    \end{center}
+    \begin{figure}[h]
+      \centering
+      \includegraphics[width = \textwidth]{../Output/images/reg_gender_2.pdf}
+    \end{figure}
+  \end{minipage}
+  \begin{minipage}{0.49\textwidth}
+    \begin{center}
+      Male \\
+      (mean: 1.70 \%, median: 0.61 \%)
+    \end{center}
+    \begin{figure}[h]
+      \includegraphics[width = \textwidth]{../Output/images/reg_gender_4.pdf}
+      \centering
+    \end{figure}
+  \end{minipage}
+  \tiny
+  \begin{tablenotes}
+  \item Notes;
+    The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
+    In the left figure, the outcome is the matriculation share of female students from each prefecture.
+    In the right figure, the outcome is the matriculation share of male students from each prefecture.
+    Rainfall and cumulated snow on the ground (both on the exam days and average for 10 days before the exam) are included in the regression.
+    Each interval on the x-axis does not include the right end.
+    The 90\% confidence intervals are shown.
+    Prefecture fixed effects and year fixed effects are also included.
+    Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{frame}
+
+%\begin{frame}\frametitle{Humanity vs. Science}
+%  \begin{minipage}{0.49\textwidth}
+%    \begin{center}
+%      Humanity \\
+%      (mean: 2.07 \%, median: 0.76 \%)
+%    \end{center}
+%    \begin{figure}[h]
+%      \centering
+%      \includegraphics[width = \textwidth]{../Output/images/reg_major_2.pdf}
+%    \end{figure}
+%  \end{minipage}
+%  \begin{minipage}{0.49\textwidth}
+%    \begin{center}
+%      Science \\
+%      (mean: 2.09 \%, median: 0.76 \%)
+%    \end{center}
+%    \begin{figure}[h]
+%      \includegraphics[width = \textwidth]{../Output/images/reg_major_4.pdf}
+%      \centering
+%    \end{figure}
+%  \end{minipage}
+%  \tiny
+%  \begin{tablenotes}
+%  \item Notes;
+%    The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
+%    In the left figure, the outcome is the matriculation share to humanity major from each prefecture.
+%    In the right figure, the outcome is the matriculation share to science major from each prefecture.
+%    Rainfall and cumulated snow on the ground (both on the exam days and average for 10 days before the exam) are included in the regression.
+%    Each interval on the x-axis does not include the right end.
+%    The 90\% confidence intervals are shown.
+%    Prefecture fixed effects and year fixed effects are also included.
+%    Standard errors are clustered at the prefecture level.
+%  \end{tablenotes}
+%\end{frame}
+
+
+
+\end{document}
+

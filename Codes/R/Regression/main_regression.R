@@ -123,7 +123,6 @@ list(res_4, res_6, res_8) %>%
   )
 
 # Non-linear regression figures ============
-
 walk2(
   list(res_2, res_4, res_6, res_8),
   c(2, 4, 6, 8), 

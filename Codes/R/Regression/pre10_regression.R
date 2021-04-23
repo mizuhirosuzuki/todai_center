@@ -98,12 +98,12 @@ list(res_1, res_2, res_3, res_4) %>%
     ),
     title = "",
     add.lines = list(
-      c("Temperature bins", rep("Yes", 3)),
-      c("Prefecture FE", rep("Yes", 3)),
-      c("Year FE", rep("Yes", 3))
+      c("Temperature bins", rep("Yes", 4)),
+      c("Prefecture FE", rep("Yes", 4)),
+      c("Year FE", rep("Yes", 4))
     ),
     type = "latex",
-    out = file.path(git_dir, "Output/tex/res_pre10_beamer.tex"),
+    out = file.path(git_dir, "Output/tex/reg_pre10_beamer.tex"),
     omit.stat = c("adj.rsq", "ser", "rsq"),
     digits = 2,
     float = FALSE
