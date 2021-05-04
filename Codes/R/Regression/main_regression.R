@@ -23,61 +23,36 @@ source(file.path(git_dir, "Codes/R/Regression/make_coef_figure.R"))
 # Main regression ==========================
 
 res_1 <- felm(
-  admission_total_share ~ daytime_temperature_degree | 
-    prefecture + year | 0 | prefecture, 
-  data = reg_df
-  )
-
-res_2 <- felm(
   admission_total_share ~ temp_cut | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
   )
 
-res_3 <- felm(
-  admission_total_share ~ daytime_temperature_degree + daytime_precipitation_mm + daytime_snowfall_m | 
-    prefecture + year | 0 | prefecture, 
-  data = reg_df
-  )
-
-res_4 <- felm(
+res_2 <- felm(
   admission_total_share ~ temp_cut + daytime_precipitation_mm + daytime_snowfall_m | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
-res_5 <- felm(
-  admission_total_share ~ daytime_temperature_degree + daytime_precipitation_mm + daytime_cum_snow_m | 
-    prefecture + year | 0 | prefecture, 
-  data = reg_df
-  )
-
-res_6 <- felm(
+res_3 <- felm(
   admission_total_share ~ temp_cut + daytime_precipitation_mm + daytime_cum_snow_m | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
-res_7 <- felm(
-  admission_total_share ~ daytime_temperature_degree + daytime_precipitation_mm + factor(daytime_cum_snow_m > .1) | 
-    prefecture + year | 0 | prefecture, 
-  data = reg_df
-)
-
-res_8 <- felm(
+res_4 <- felm(
   admission_total_share ~ temp_cut + daytime_precipitation_mm + factor(daytime_cum_snow_m > .1) | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
-list(res_1, res_2, res_3, res_4, res_5, res_6, res_7, res_8) %>% 
+list(res_1, res_2, res_3, res_4) %>% 
   stargazer(
     dep.var.labels = "Matriculation share (\\%)",
     covariate.labels = c(
-      "Temperature (\\degree C)",
       "Temperature (\\degree C) $\\le$ 0",
-      "Temperature (\\degree C) $>$ 0, $\\le$ 3",
-      "Temperature (\\degree C) $>$ 6, $\\le$ 9",
+      "Temperature (\\degree C) 0-3",
+      "Temperature (\\degree C) 6-9",
       "Temperature (\\degree C) $>$ 9",
       "Rainfall (mm)",
       "Snowfall (m)",
@@ -97,7 +72,7 @@ list(res_1, res_2, res_3, res_4, res_5, res_6, res_7, res_8) %>%
   )
 
 # Regression table for beamer
-list(res_4, res_6, res_8) %>% 
+list(res_2, res_3, res_4) %>% 
   stargazer(
     dep.var.labels = "Matriculation share (\\%)",
     keep = c(
@@ -124,8 +99,8 @@ list(res_4, res_6, res_8) %>%
 
 # Non-linear regression figures ============
 walk2(
-  list(res_2, res_4, res_6, res_8),
-  c(2, 4, 6, 8), 
+  list(res_1, res_2, res_3, res_4),
+  c(1, 2, 3, 4), 
   ~ ggsave(
     filename = file.path(git_dir, str_interp("Output/images/main_reg_${.y}.pdf")),
     plot = make_coef_figure(.x),

@@ -78,17 +78,18 @@ list(
   ) %>% 
   save_kable(file.path(git_dir, "Output/tex/sum_stat.tex"))
 
-list(
-  function(x) sum(!is.na(x)), 
-  mean, sd, median, min, max
-  ) %>% 
-  map(
-  function(x) 
-    reg_df %>% 
-    dplyr::select(
-      admission_Arts_share,
-      admission_Sciences_share,
-      ) %>% 
-    summarise_all(x)
-  ) %>% 
-  bind_rows() 
+# list(
+#   function(x) sum(!is.na(x)), 
+#   mean, sd, median, min, max
+#   ) %>% 
+#   map(
+#   function(x) 
+#     reg_df %>% 
+#     dplyr::select(
+#       admission_Arts_share,
+#       admission_Sciences_share,
+#       ) %>% 
+#     summarise_all(x)
+#   ) %>% 
+#   bind_rows() 
+

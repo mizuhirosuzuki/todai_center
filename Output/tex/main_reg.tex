@@ -1,46 +1,43 @@
 
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Thu, Apr 22, 2021 - 23:18:23
-\begin{tabular}{@{\extracolsep{5pt}}lcccccccc} 
+% Date and time: Tue, May 04, 2021 - 11:24:34
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
- & \multicolumn{8}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-9} 
-\\[-1.8ex] & \multicolumn{8}{c}{Matriculation share (\%)} \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8)\\ 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{Matriculation share (\%)} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
 \hline \\[-1.8ex] 
- Temperature (\degree C) & 0.02 &  & 0.02 &  & 0.02 &  & 0.02 &  \\ 
-  & (0.02) &  & (0.02) &  & (0.02) &  & (0.02) &  \\ 
-  & & & & & & & & \\ 
- Temperature (\degree C) $\le$ 0 &  & $-$0.18$^{**}$ &  & $-$0.19$^{**}$ &  & $-$0.16$^{**}$ &  & $-$0.15$^{*}$ \\ 
-  &  & (0.08) &  & (0.08) &  & (0.08) &  & (0.08) \\ 
-  & & & & & & & & \\ 
- Temperature (\degree C) $>$ 0, $\le$ 3 &  & $-$0.08$^{*}$ &  & $-$0.08$^{*}$ &  & $-$0.08$^{*}$ &  & $-$0.08$^{*}$ \\ 
-  &  & (0.04) &  & (0.04) &  & (0.04) &  & (0.04) \\ 
-  & & & & & & & & \\ 
- Temperature (\degree C) $>$ 6, $\le$ 9 &  & 0.13 &  & 0.13 &  & 0.13 &  & 0.13 \\ 
-  &  & (0.10) &  & (0.09) &  & (0.09) &  & (0.09) \\ 
-  & & & & & & & & \\ 
- Temperature (\degree C) $>$ 9 &  & 0.14 &  & 0.14 &  & 0.15 &  & 0.15 \\ 
-  &  & (0.12) &  & (0.12) &  & (0.12) &  & (0.12) \\ 
-  & & & & & & & & \\ 
- Rainfall (mm) &  &  & $-$0.04 & $-$0.02 & 0.04 & 0.06 & 0.05 & 0.06 \\ 
-  &  &  & (0.10) & (0.09) & (0.08) & (0.08) & (0.09) & (0.08) \\ 
-  & & & & & & & & \\ 
- Snowfall (m) &  &  & 7.77 & 7.75 &  &  &  &  \\ 
-  &  &  & (10.91) & (9.95) &  &  &  &  \\ 
-  & & & & & & & & \\ 
- Cumulated snow (m) &  &  &  &  & $-$0.18$^{**}$ & $-$0.19$^{**}$ &  &  \\ 
-  &  &  &  &  & (0.09) & (0.09) &  &  \\ 
-  & & & & & & & & \\ 
- Cumulated snow $>$ .10 m &  &  &  &  &  &  & $-$0.11$^{**}$ & $-$0.11$^{***}$ \\ 
-  &  &  &  &  &  &  & (0.04) & (0.04) \\ 
-  & & & & & & & & \\ 
+ Temperature (\degree C) $\le$ 0 & $-$0.18$^{**}$ & $-$0.19$^{**}$ & $-$0.16$^{**}$ & $-$0.15$^{*}$ \\ 
+  & (0.08) & (0.08) & (0.08) & (0.08) \\ 
+  & & & & \\ 
+ Temperature (\degree C) 0-3 & $-$0.08$^{*}$ & $-$0.08$^{*}$ & $-$0.08$^{*}$ & $-$0.08$^{*}$ \\ 
+  & (0.04) & (0.04) & (0.04) & (0.04) \\ 
+  & & & & \\ 
+ Temperature (\degree C) 6-9 & 0.13 & 0.13 & 0.13 & 0.13 \\ 
+  & (0.10) & (0.09) & (0.09) & (0.09) \\ 
+  & & & & \\ 
+ Temperature (\degree C) $>$ 9 & 0.14 & 0.14 & 0.15 & 0.15 \\ 
+  & (0.12) & (0.12) & (0.12) & (0.12) \\ 
+  & & & & \\ 
+ Rainfall (mm) &  & $-$0.02 & 0.06 & 0.06 \\ 
+  &  & (0.09) & (0.08) & (0.08) \\ 
+  & & & & \\ 
+ Snowfall (m) &  & 7.75 &  &  \\ 
+  &  & (9.95) &  &  \\ 
+  & & & & \\ 
+ Cumulated snow (m) &  &  & $-$0.19$^{**}$ &  \\ 
+  &  &  & (0.09) &  \\ 
+  & & & & \\ 
+ Cumulated snow $>$ .10 m &  &  &  & $-$0.11$^{***}$ \\ 
+  &  &  &  & (0.04) \\ 
+  & & & & \\ 
 \hline \\[-1.8ex] 
-Prefecture FE & Yes & Yes & Yes & Yes & Yes & Yes & Yes & Yes \\ 
-Year FE & Yes & Yes & Yes & Yes & Yes & Yes & Yes & Yes \\ 
-Observations & 423 & 423 & 423 & 423 & 423 & 423 & 423 & 423 \\ 
+Prefecture FE & Yes & Yes & Yes & Yes \\ 
+Year FE & Yes & Yes & Yes & Yes \\ 
+Observations & 423 & 423 & 423 & 423 \\ 
 \hline 
 \hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{8}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 

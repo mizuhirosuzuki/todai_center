@@ -28,7 +28,15 @@
 
 \title{Winter weather on exam dates and matriculation for a prestigious university in Japan}%: \\ Empirical analysis on auditing reports in Brazil}
 %\author{Mizuhiro Suzuki\thanks{Department of Agricultural and Applied Economics, University of Wisconsin-Madison. Contact: msuzuki7@wisc.edu. The author would like to thank Laura Schechter for her numerous feedback and support. I am also grateful to Joshua Deutschmann, Paul Dower, Jeremy Foltz, Priya Mukherjee, Andrew Stevens, and seminar participants at the UW-Madison Agricultural and Applied Economics department for helpful comments and suggestions. Any errors in this draft are the sole responsibility of the author.}}
-\author{Mizuhiro Suzuki\thanks{Department of Agricultural and Applied Economics, University of Wisconsin-Madison. Contact: msuzuki7@wisc.edu. The authors would like to thank Laura Schechter for her numerous feedback and support.}}
+\author{
+  Mizuhiro Suzuki\thanks{
+    Department of Agricultural and Applied Economics, University of Wisconsin-Madison.
+    Contact: msuzuki7@wisc.edu.
+    The author would like to thank Laura Schechter for her numerous feedback and support.
+    I am also grateful to Daiji Kawaguchi for helpful comments and suggestions.
+    Any errors are the sole responsibility of the author.
+  }
+}
 \date{\today \\ \vspace{1cm} Preliminary draft \\ Please do not cite or circulate}
 
 \begin{document}
@@ -53,16 +61,23 @@
 
 \section{Introduction}
 
-Climate change is expected to increase the frequency of extreme weather events.
-This is considered to have not only macro-level impacts but also micro-level impacts such as individual behaviors.
-To understand the effect, emerging literature has studied effects of high temperature on various outcomes.\footnote{
-  Examples include \citet{Dell2012, Burke2015, Heyes2019, Garg2020, Geruso2018, Park2020a, Park2020b, GraffZivi2018, GraffZivin2014}.
-  \citet{Carleton2016} thoroughly review this literature.
+University admission is an important step in life and can have consequences in later-life outcomes such as job occupation and earnings.\footnote{
+  \citet{Hout2012} reviews the returns to college education in the context of the United States.
 }
-What has been less studied in the literature is the economic impact of \textit{low} temperature.
-Given the possibility that the sea-ice loss, partly due to climate change, results in cold winters with severely low temperatures \citep{Kretschmer2016, Kim2014}, it is important to understand how low temperature can affect our economies and lives.
+For admission selection, standardized exams have been widely used in many countries.\footnote{
+  Examples include the Unites States, the United Kingdom, Brazil, China, South Korea, and Japan.
+}
+Given the importance, the results of the exams are expected to evaluate the exam takers' ability and knowledge correctly and are not supposed to be affected by seemingly irrelevant factors.
+However, recent studies have shown that exam performance is sensitive to external factors.
+One such factor is temperature:
+heat on the exam days has been shown to affect exam results in high-stakes settings \citep{Park2020a, GraffZivin2020}.
+What has been less studied in the literature is the impact of \textit{low} temperature.\footnote{
+  One might think that, considering the on-going global \textit{warming}, the effect of low temperature is becoming less important.
+  However, the future climate change can cause the sea-ice loss, would could result in the cold winters with severely low temperatures \citep{Kretschmer2016, Kim2014}.
+  Hence, it is important to understand how low temperature can affect our economies and lives.
+}
 
-This study analyzes the effect of winter weather on exam outcomes in Japan.
+To fill this gap in the literature, this study analyzes the effect of winter weather on exam outcomes in Japan.
 For admission, most public universities in Japan require high school seniors and graduates to take a centralized test, called National Center Test for University Admission (Center Test henceforth).
 Students take the exam on the same dates in mid-January in their prefectures.\footnote{
   There are 47 prefectures in Japan.
@@ -221,21 +236,25 @@ However, the second effect is unlikely to be large for UTokyo since it is known 
 Therefore, I rule out the second possibility and attribute a reduction in matriculation shares to the worse performance at Center Test.
 
 In the analyses, the outcome variable, $Y_{jt}$, is the matriculation share (\%) for UTokyo of a prefecture $j$ in year $t$.
-Let $T_{jt}$ be the average temperature across two exam dates in $j$ in year $t$.
-I use functions of $T_{jt}$ in the regressions ($f$), which can be linear or non-linear.
-I include other weather variables such as rainfall, snowfall, and cumulated snow on the ground on exam dates as a vector $X_{jt}$.
+%Let $T_{jt}$ be the average temperature across two exam dates in $j$ in year $t$.
+%I use functions of $T_{jt}$ in the regressions ($f$), which can be linear or non-linear.
+The main right-hand side variable is temperature on the exam dates.
+To allow for non-linear effects of temperature on the outcome, I use the 3-$^o$C temperature intervals, $T_{jt}^k$.\footnote{
+  The results with a linear specification are shown in Appendix \ref{sec:appendix_table} and will be discussed below.
+}
+I also include other weather variables such as rainfall, snowfall, and cumulated snow on the ground on exam dates as a vector $X_{jt}$.
 As fixed effects, prefecture fixed effects ($\mu_j$) and year fixed effects ($\tau_t$) are used.
 Finally, the error term is represented as $\epsilon_{jt}$.
 
-I run the following regression equation:
+Given the above notation, I run the following regression equation:
 \begin{equation*}
-  Y_{jt} = f(T_{jt}) + X_{jt}' \beta + \mu_j + \tau_t + \epsilon_{jt}.
+  Y_{jt} = \sum_k T_{jt}^k + X_{jt}' \beta + \mu_j + \tau_t + \epsilon_{jt}.
 \end{equation*}
 I exploit the variation of temperature on exam dates, which I consider exogenous after controlling for prefecture-specific time-invariant factors and time-varying aggregate shocks through prefecture and year fixed effects.
 As Figure \ref{fig:temperature_diff} shows, each prefecture experiences substantial variations in temperature on exam dates.\footnote{
   Figures for other weather variables are provided in Appendix \ref{sec:appendix_figure}.
 }$^,$\footnote{
-  The figure shows that temperature is low for most prefectures in some years (eg. 2017) and is high in other years (eg. 2019).
+  The figure shows that temperature is low for most prefectures in some years (eg. 2017) and high in other years (eg. 2019).
   This can bring up a concern that temperature \textit{deviations} from the prefecture average have limited variations within each year.
   If this was the case, most variations for estimation would be absorbed by prefecture fixed effects and year fixed effects.
   Figure \ref{fig:temperature_diff_by_year} shows that, even within each year, the temperature deviations have large variations across prefectures.
@@ -245,7 +264,7 @@ One potential problem in the analysis is that a student from a high school in a 
 This means that, for these students, the weather at the exam sites is measured with errors.
 The primary reason for this to happen is that a senior student at a high school located at a prefecture different from his home prefecture fails to get into any university and retake Center Test next year in his home prefecture.
 In 2020, 38\% of the admitted students are high-school graduates.
-Moreover, in the same year, according to the School Basic Survey, the share of high-school students from junior high schools in different prefectures was 3.9\% \citep{eStat}.
+In the same year, according to the School Basic Survey, the share of high-school students from junior high schools in different prefectures was 3.9\% \citep{eStat}.
 Hence, if I use this number as an approximation for the share of high-school students whose hometowns are in different prefectures, I obtain a rough estimate of the share of students whose exam-date weather is measured with errors for the reason above as $0.38 * 0.039 = 1.5\%$. 
 Given this small proportion of exam takers who are susceptible to the measurement error, I consider that the bias on the estimates is negligible.
 Another potential concern is that, as discussed in footnote \ref{footnote:prefecture}, students in several municipalities in a prefecture could take Center Test in a neighboring prefecture.
@@ -269,20 +288,21 @@ Since neighboring prefectures are geographically close, I consider that the magn
 
 The main empirical results are provided in Table \ref{tab:main_reg}.
 The standard errors are clustered at the prefecture level.
-Column (1) shows the result with a linear specification.
-While the point estimate is positive, which means matriculation shares are higher if an exam is held on warmer days, it is statistically insignificant. 
-The estimates with a non-linear specification allowing for flexible temperature effects (column (2)) show a negative and statistically significant impact of cold weather. 
+Without other weather variables, the estimates in column (1) show a negative and statistically significant impact of cold weather.
 Since the mean matriculation share is $2.08$\%, by reducing the temperature from the reference bin (between 3 and 6 $^o$C) to the lowest temperature bin (below 0 $^o$C), the matriculation share decreases by 9\%.
 Moreover, due to the stark skewness in the distribution of matriculation shares, the median matriculation share is $0.79$\%.
 Therefore, the same temperature change decreases the matriculation share by 22\% of the median value.
-Also, the plateau effect of temperature above 6 $^o$C could be the reason why the linear specification in column (1) could not capture the non-linear effect of temperature and the estimate is statistically insignificant.
-Although for a quite different temperature range, similar plateau effects are found in \citet{Park2020a}.
 
-In columns (3) and (4), I add rainfall and snowfall in the regressions.
+In column (2), I add rainfall and snowfall in the regressions.
 While temperature coefficients are barely affected, I find that rainfall and snowfall on the exam dates do not impact the matriculation shares.
-In columns (5) and (6), instead of snowfall on the exam dates, I use cumulated snow on the ground and find its negative impact on the outcome. 
-To capture the effect of the existence of a certain amount of snow on the ground, columns (7) and (8) allow a non-linear effect of cumulated snow.
+In column (3), instead of snowfall on the exam dates, I use cumulated snow on the ground and find its negative impact on the outcome. 
+To capture the effect of the existence of a certain amount of snow on the ground, column (4) allows a non-linear effect of cumulated snow.
 The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 inches) decreases the matriculation share by 0.11 percentage point.\footnote{
+  Table \ref{tab:linear_reg} shows the result with linear specifications.
+  While the point estimates for temperature are positive, which means matriculation shares are higher if an exam is held on warmer days, they are statistically insignificant. 
+  This could due to the plateau effect of temperature above 6 $^o$C in Table \ref{tab:main_reg}.
+  Although for a quite different temperature range, similar plateau effects are found in \citet{Park2020a}.
+}$^,$\footnote{
   Following the falsification test in \citet{Cho2017}, I check if weather variables one year after the actual Center Test affect the matriculation shares.
   The results in Table \ref{tab:reg_placebo_exam} show not only that the weather one year after Center Test has insignificant impacts on matriculation shares but also including the weather variables one year after Center Test barely changes the coefficients on contemporaneous weather variables.
 }
@@ -299,13 +319,14 @@ The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 
       The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
       The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
       I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+      Temperature intervals do not contain the right ends.
       Standard errors are clustered at the prefecture level.
   \end{tablenotes}
 \end{table}
 
 One possible interpretation of the results is that the temperature on exam dates captures the weather before the exam due to the serial correlation.
 In other words, the effects found in Table \ref{tab:main_reg} could be interpreted as the effects on preparation for the exam. 
-For instance, cold weather can make it hard for students to focus on studying, suggested by existing studies \citep{Taylor2016}.
+For instance, cold weather can make it hard for students to focus on studying, as suggested by existing studies \citep{Taylor2016}.
 Also, snowfall can prevent students from going to high schools or cram schools for studying.
 To investigate this possibility, I use the average weather variables for 10 days before the exams and run regressions.
 The results in columns (1) and (2) in Table \ref{tab:reg_pre10} show statistically insignificant estimates for the temperature variables.
@@ -332,6 +353,7 @@ This suggests that the second mechanism is dominant.
       The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
       For weather variables with "(exam dates)", I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
       For weather variables with "(previous 10 days)", I use their averages at prefecture capitals between 10 days before and 1 day before the first day of Center Test.
+      Temperature intervals do not contain the right ends.
       Standard errors are clustered at the prefecture level.
   \end{tablenotes}
 \end{table}
@@ -447,6 +469,62 @@ Given the importance of exam results for later life outcomes of students, it is 
 \renewcommand\thefigure{\Alph{section}.\arabic{figure}}
 \renewcommand\thetable{\Alph{section}.\arabic{table}}
   
+\section{Appendix tables}\label{sec:appendix_table}
+
+%\begin{table}[H]
+%  \center
+%  \caption{Regression: Matriculation share (\%) and weather on exam dates by gender}
+%  \input{"../Output/tex/reg_by_gender.tex"}
+%  \label{tab:reg_by_gender}
+%  \small
+%  \begin{tablenotes}
+%    \item
+%      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+%      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+%      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+%      Standard errors are clustered at the prefecture level.
+%  \end{tablenotes}
+%\end{table}
+
+\begin{table}[H]
+  \center
+  \caption{Regression: Matriculation share (\%) and weather on exam dates (linear specification)}
+  \small
+  \input{"../Output/tex/linear_reg.tex"}
+  \label{tab:linear_reg}
+  \small
+  \begin{tablenotes}
+    \item
+      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+      Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{table}
+
+\begin{table}[H]
+  \center
+  \caption{Falsification test: Matriculation share (\%) and weather on exam dates and one year after}
+  \scriptsize
+  \input{"../Output/tex/reg_placebo_exam.tex"}
+  \label{tab:reg_placebo_exam}
+  \scriptsize
+  \begin{tablenotes}
+    \item
+      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+      I represent the contemporaneous weather variables with ``($t$)'' and the weather one year after Center Test with ``($t + 1$).''
+      Temperature intervals do not contain the right ends.
+      Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{table}
+
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\renewcommand\thefigure{\Alph{section}.\arabic{figure}}
+\renewcommand\thetable{\Alph{section}.\arabic{table}}
+  
 \section{Appendix figures}\label{sec:appendix_figure}
 
 \begin{figure}[H]
@@ -531,46 +609,6 @@ Given the importance of exam results for later life outcomes of students, it is 
 %      Average of the values across years is shown in the map.
 %  \end{tablenotes}
 %\end{figure}
-
-\setcounter{figure}{0}
-\setcounter{table}{0}
-\renewcommand\thefigure{\Alph{section}.\arabic{figure}}
-\renewcommand\thetable{\Alph{section}.\arabic{table}}
-  
-\section{Appendix tables}
-
-
-%\begin{table}[H]
-%  \center
-%  \caption{Regression: Matriculation share (\%) and weather on exam dates by gender}
-%  \input{"../Output/tex/reg_by_gender.tex"}
-%  \label{tab:reg_by_gender}
-%  \small
-%  \begin{tablenotes}
-%    \item
-%      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
-%      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-%      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
-%      Standard errors are clustered at the prefecture level.
-%  \end{tablenotes}
-%\end{table}
-
-\begin{table}[H]
-  \center
-  \caption{Falsification test: Matriculation share (\%) and weather on exam dates and one year after}
-  \scriptsize
-  \input{"../Output/tex/reg_placebo_exam.tex"}
-  \label{tab:reg_placebo_exam}
-  \scriptsize
-  \begin{tablenotes}
-    \item
-      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
-      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
-      I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
-      I represent the contemporaneous weather variables with ``($t$)'' and the weather one year after Center Test with ``($t + 1$).''
-      Standard errors are clustered at the prefecture level.
-  \end{tablenotes}
-\end{table}
 
   
 \end{document}
