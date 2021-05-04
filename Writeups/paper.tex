@@ -73,7 +73,7 @@ One such factor is temperature:
 heat on the exam days has been shown to affect exam results in high-stakes settings \citep{Park2020a, GraffZivin2020}.
 What has been less studied in the literature is the impact of \textit{low} temperature.\footnote{
   One might think that, considering the on-going global \textit{warming}, the effect of low temperature is becoming less important.
-  However, the future climate change can cause the sea-ice loss, would could result in the cold winters with severely low temperatures \citep{Kretschmer2016, Kim2014}.
+  However, the future climate change can cause the sea-ice loss, which could result in the cold winters with severely low temperatures \citep{Kretschmer2016, Kim2014}.
   Hence, it is important to understand how low temperature can affect our economies and lives.
 }
 
@@ -261,7 +261,7 @@ As Figure \ref{fig:temperature_diff} shows, each prefecture experiences substant
 }
 
 One potential problem in the analysis is that a student from a high school in a prefecture does not necessarily take Center Test in the same municipality.
-This means that, for these students, the weather at the exam sites is measured with errors.
+This means that, for such students, the weather at the exam sites is measured with errors.
 The primary reason for this to happen is that a senior student at a high school located at a prefecture different from his home prefecture fails to get into any university and retake Center Test next year in his home prefecture.
 In 2020, 38\% of the admitted students are high-school graduates.
 In the same year, according to the School Basic Survey, the share of high-school students from junior high schools in different prefectures was 3.9\% \citep{eStat}.
@@ -297,15 +297,17 @@ In column (2), I add rainfall and snowfall in the regressions.
 While temperature coefficients are barely affected, I find that rainfall and snowfall on the exam dates do not impact the matriculation shares.
 In column (3), instead of snowfall on the exam dates, I use cumulated snow on the ground and find its negative impact on the outcome. 
 To capture the effect of the existence of a certain amount of snow on the ground, column (4) allows a non-linear effect of cumulated snow.
-The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 inches) decreases the matriculation share by 0.11 percentage point.\footnote{
-  Table \ref{tab:linear_reg} shows the result with linear specifications.
-  While the point estimates for temperature are positive, which means matriculation shares are higher if an exam is held on warmer days, they are statistically insignificant. 
-  This could due to the plateau effect of temperature above 6 $^o$C in Table \ref{tab:main_reg}.
-  Although for a quite different temperature range, similar plateau effects are found in \citet{Park2020a}.
-}$^,$\footnote{
-  Following the falsification test in \citet{Cho2017}, I check if weather variables one year after the actual Center Test affect the matriculation shares.
-  The results in Table \ref{tab:reg_placebo_exam} show not only that the weather one year after Center Test has insignificant impacts on matriculation shares but also including the weather variables one year after Center Test barely changes the coefficients on contemporaneous weather variables.
-}
+The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 inches) decreases the matriculation share by 0.11 percentage point.
+These results suggest that not only temperature but also snow on the ground on the exam dates affect exam performance.
+
+Two points are worth noting.
+First, Table \ref{tab:linear_reg} shows the results with linear specifications.
+While the point estimates for temperature are positive, which means matriculation shares are higher if an exam is held on warmer days, they are statistically insignificant. 
+This could due to the plateau effect of temperature above 6 $^o$C in Table \ref{tab:main_reg}.
+Although for a quite different temperature range, similar plateau effects are found in \citet{Park2020a}.
+Secondly, following the falsification test in \citet{Cho2017}, I check if weather variables one year after the actual Center Test affect the matriculation shares.
+The results in Table \ref{tab:reg_placebo_exam} show not only that the weather one year after Center Test has insignificant impacts on matriculation shares but also including the weather variables one year after Center Test barely changes the coefficients on contemporaneous weather variables.
+This indicates that the results in \ref{tab:main_reg} capture the effect of transitory shocks on the exam dates.
 
 \begin{table}[H]
   \center
@@ -324,10 +326,10 @@ The result shows that snow on the ground cumulated more than 10 cm ($\approx$ 4 
   \end{tablenotes}
 \end{table}
 
-One possible interpretation of the results is that the temperature on exam dates captures the weather before the exam due to the serial correlation.
-In other words, the effects found in Table \ref{tab:main_reg} could be interpreted as the effects on preparation for the exam. 
+One possible interpretation of the results is that the estimates in Table \ref{tab:main_reg} reflect the effects of weather on preparation for the exam.
 For instance, cold weather can make it hard for students to focus on studying, as suggested by existing studies \citep{Taylor2016}.
 Also, snowfall can prevent students from going to high schools or cram schools for studying.
+Due to serial correlation between the weather on exam dates and the weather days or weeks before the exam, my regression in Table \ref{tab:main_reg} could capture these effects.
 To investigate this possibility, I use the average weather variables for 10 days before the exams and run regressions.
 The results in columns (1) and (2) in Table \ref{tab:reg_pre10} show statistically insignificant estimates for the temperature variables.
 Moreover, including the weather variables for 10 days before the exams barely changes the estimates on the weather variables on the exam dates (columns (3) and (4)).
@@ -361,9 +363,9 @@ This suggests that the second mechanism is dominant.
 \section{Conclusion}\label{sec:conclusion}
 
 This paper studies the impact of winter weather on cognitive performance on a high-stakes exam in Japan.
-I use the matriculation share for the most prestigious university in Japan, the University of Tokyo.
+I use the matriculation share for the most prestigious university in Japan, the University of Tokyo, as an outcome.
 Most of the existing studies in the literature have focused on the effect of heat on cognitive performance, while the impact of cold weather remains largely unknown.
-This study fills the gap and identifies the causal impact of winter weather on matriculation.
+This study fills the gap by identifying the causal impact of winter weather on exam results.
 
 The results show both economically and statistically significant impacts of low temperature and cumulated snow on the ground on the exam dates.
 Changing the temperature from 3-6 $^o$C to below 0 $^o$C decreases the matriculation share of a prefecture by 0.18 percentage point, which is 9\% of the mean matriculation share, or 22\% of the median matriculation share.
