@@ -45,7 +45,7 @@ make_coef_figure <- function(res, temp_cut_str = "^temp_cut") {
         "" > 9
       )
     ) +
-    ylim(-0.4, 0.4)
+    ylim(-0.4, 0.48)
 
   
   return(fig)

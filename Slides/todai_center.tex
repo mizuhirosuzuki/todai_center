@@ -1,4 +1,5 @@
-\documentclass[9pt, pdfmx,hiresbb]{beamer}
+\documentclass[10pt, pdfmx,hiresbb]{beamer}
+\usetheme{metropolis}
 \usepackage{natbib}
 \usepackage{bbm}
 \usepackage[utf8]{inputenc}
@@ -51,7 +52,7 @@
 
 %\usetheme{CambridgeUS}
 \setbeamertemplate{navigation symbols}{}
-\title[Temperature and Exam]{Temperature and Bureaucracy: \\ Empirical Analysis on Auditing Reports in Brazil}
+\title[Temperature and Exam]{Winter weather on exam dates and matriculation for a prestigious university in Japan}
 \author[Suzuki]{Mizuhiro Suzuki}
 \date{May 13th, 2021}
 
@@ -60,22 +61,72 @@
 \titlepage
 \end{frame}
 
-\section{Background}
-\begin{frame}\frametitle{Roadmap}
+\begin{frame}\frametitle{Research Question \& Roadmap}
   \begin{itemize}
-    \item Background
-    \item Data
-    \item Empirical strategy
-    \item Results
-    \item (Some more results not in the paper for now)
-  \end{itemize}
-  \medskip
-  \begin{itemize}
-    \item Planning to submit the paper to JEEM short 
-    \item Max 3,000 words (but ``modestly longer papers will be considered'')
-    \item My paper now has 3,200 words
+    \item Research Question: Does cold weather on the exam dates worsens performance at a high-stakes exam?
+    \item Roadmap:
+      \begin{itemize}
+        \item Background
+        \item Data
+        \item Empirical strategy
+        \item Results
+        \item (Some more results not in the paper for now)
+      \end{itemize}
+    \item A quick heads-up\dots
+      \begin{itemize}
+        \item Planning to submit the paper to JEEM short 
+        \item Max 3,000 words (but ``modestly longer papers will be considered'')
+        \item My paper now has 3,200 words
+      \end{itemize}
   \end{itemize}
 \end{frame}
+
+\begin{frame}\frametitle{Background - Center Test}
+  \begin{itemize}
+    \item In Japan, for public university admission, students need to take two exams:
+    \item First-stage: \textcolor{red}{Center Test}
+      \begin{itemize}
+        \item Held in mid-January (Saturday and Sunday)
+          \begin{itemize}
+            \item Social science, Japanese, and English on the first day (9:30 AM - 6:10 PM)
+            \item Mathematics and natural science on the second day (9:30 AM - 5:50 PM)
+          \end{itemize}
+        \item Questions are multiple-choice and common for all exam takers
+        \item Students take the exam in their own prefectures
+      \end{itemize}
+    \item Second-stage: University-specific exams
+      \begin{itemize}
+        \item Typically held in late February
+        \item Students take the exams at universities they apply for
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Background - Admission for the University of Tokyo}
+  \begin{itemize}
+    \item The University of Tokyo (UTokyo) is the most prestigious university in Japan
+      \begin{itemize}
+        \item Highest-ranked univ. in Japan (73rd ranked in the world ranking) (U.S. News) \\
+          (The second highest-ranked univ. is Kyoto University, 125th ranked in the world ranking)
+        \item Kawaguchi and Ma (2008): ``The University of Tokyo has occupied the top position of the single-peaked university hierarchy since its establishment in 1877.''
+      \end{itemize}
+    \item Center Test scores for admission to UTokyo:
+      \begin{itemize}
+        \item Used for eligibility to take the second-stage exam
+          %Thresholds varying across years and majors are set, and if scores at Center Test are below the thresholds, the students cannot take the second-stage exam.
+        \item Taken into consideration for final admission 
+          \begin{itemize}
+            \item The final score of a student is the weighted sum of exam scores at the first- (20\%) and second-stage (80\%) exams
+          \end{itemize}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+%\begin{frame}\frametitle{Background - Winter weather and exam performance}
+%  \begin{itemize}
+%    \item 
+%  \end{itemize}
+%\end{frame}
 
 \begin{frame}\frametitle{Data}
   \begin{itemize}
@@ -87,6 +138,10 @@
     \item Matriculation for UTokyo from University Basic Information
       \begin{itemize}
         \item Information from 2012 to 2020 on the number of matriculated students for each university by prefectures at which their high schools are located
+          \begin{itemize}
+            \item By gender (male vs. female)
+            \item By major (humanity vs. science)
+          \end{itemize}
         \item I calculate the matriculation shares for UTokyo from a prefecture $j$ in year $t$ as 
           \begin{equation*}
             \frac{\text{\# matriculations for UTokyo from $j$ in year $t$}}{\text{\# total matriculations for UTokyo in year $t$}}
@@ -101,6 +156,14 @@
       \caption{Summary Statistics}
       \footnotesize
       \input{../Output/tex/sum_stat.tex}
+      \tiny
+      \begin{tablenotes}
+        \item 
+          Notes:
+          Matriculation share (\%) is the share of newly matriculated students to the University of Tokyo from each prefecture.
+          The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+          I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
+      \end{tablenotes}
     \end{table}
   \end{center}
 \end{frame}
@@ -109,7 +172,7 @@
   \begin{center}
     \begin{figure}
       %\caption{Map of matriculation shares (\%)}
-      \includegraphics[width=7.5cm]{../Output/images/admission_map.pdf}
+      \includegraphics[width=7cm]{../Output/images/admission_map.pdf}
       \tiny
       \begin{tablenotes}
       \item Notes:
@@ -122,7 +185,20 @@
   \end{center}
 \end{frame}
 
-\begin{frame}\frametitle{Empirical Strategy}
+\begin{frame}\frametitle{Empirical Strategy - Why UTokyo?}
+  \begin{itemize}
+    \item Suppose that low temperature negatively affects exam performance
+    \item If I consider a matriculation for a middle-ranked university,
+      \begin{enumerate}
+        \item students in the prefecture who would get into the middle-ranked university if the temperature was higher could go to a lower-ranked university, but
+        \item students in the prefecture who would get into a higher-ranked university may get into the middle-ranked university
+      \end{enumerate}
+    \item Considering the matriculation for UTokyo (= the most prestigious university in Japan) rules out the second possibility
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Empirical Strategy - Estimation equation}
+  \label{est_eq}
   \begin{equation*}
     Y_{jt} = \sum_k \alpha_k T_{jt}^k + X_{jt}' \beta + \mu_j + \tau_t + \epsilon_{jt}.
   \end{equation*}
@@ -133,41 +209,10 @@
     \item $\mu_j$: prefecture fixed effects
     \item $\tau_t$: year fixed effects
     \item $\epsilon_{jt}$: error term
-    \item Standard errors are clustered at the prefecture level
+    \item Standard errors are clustered at the prefecture level 
   \end{itemize}
-\end{frame}
-
-\begin{frame}\frametitle{Temperature variations in each prefecture}
-  \begin{center}
-    \begin{figure}
-      %\caption{Map of matriculation shares (\%)}
-      \includegraphics[width=9.5cm]{../Output/images/temperature_diff.pdf}
-      \tiny
-      \begin{tablenotes}
-      \item Notes:
-        Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
-        Average across two test days in each year is shown in the figure.
-        The prefectures are ordered by the mean temperature across years (lowest to left and highest to right).
-      \end{tablenotes}
-    \end{figure}
-  \end{center}
-\end{frame}
-
-\begin{frame}\frametitle{Deviation of temperatures from within-prefecture averages}
-  \begin{center}
-    \begin{figure}
-      %\caption{Map of matriculation shares (\%)}
-      \includegraphics[width=7.5cm]{../Output/images/temperature_diff_by_year.pdf}
-      \tiny
-      \begin{tablenotes}
-      \item Notes:
-        Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
-        Deviations of average temperatures across two test days from their within-prefecture means are shown in the figure by year.
-        In each panel, red dots are the deviations in the year shown above and gray dots are the deviations in the other years.
-        The prefectures are ordered by the mean temperature across years (lowest to left and highest to right).
-      \end{tablenotes}
-    \end{figure}
-  \end{center}
+  \hyperlink{temp_dev_1}{\beamergotobutton{Temperature variation}}
+  \hyperlink{temp_dev_2}{\beamergotobutton{Within-prefecture temperature variation}}
 \end{frame}
 
 \begin{frame}\frametitle{Temperature effects on the matriculation shares (\%)}
@@ -192,7 +237,7 @@
     \begin{table}[h]
       \Wider[4em]{
       \center
-      \fontsize{6}{8}\selectfont
+      \fontsize{6}{7}\selectfont
       \input{../Output/tex/main_reg_beamer.tex}
       \tiny
       \begin{tablenotes}
@@ -276,7 +321,7 @@
   \begin{table}[h]
     \Wider[4em]{
     \center
-    \fontsize{6}{7}\selectfont
+    \fontsize{7}{5}\selectfont
     \input{../Output/tex/reg_pre10_beamer.tex}
     \tiny
     \begin{tablenotes}
@@ -289,7 +334,7 @@
   \end{table}
 \end{frame}
 
-\begin{frame}\frametitle{Female vs. Male}
+\begin{frame}\frametitle{Some additional analysis: Female vs. Male}
   \begin{minipage}{0.49\textwidth}
     \begin{center}
       Female \\
@@ -324,41 +369,98 @@
   \end{tablenotes}
 \end{frame}
 
-%\begin{frame}\frametitle{Humanity vs. Science}
-%  \begin{minipage}{0.49\textwidth}
-%    \begin{center}
-%      Humanity \\
-%      (mean: 2.07 \%, median: 0.76 \%)
-%    \end{center}
-%    \begin{figure}[h]
-%      \centering
-%      \includegraphics[width = \textwidth]{../Output/images/reg_major_2.pdf}
-%    \end{figure}
-%  \end{minipage}
-%  \begin{minipage}{0.49\textwidth}
-%    \begin{center}
-%      Science \\
-%      (mean: 2.09 \%, median: 0.76 \%)
-%    \end{center}
-%    \begin{figure}[h]
-%      \includegraphics[width = \textwidth]{../Output/images/reg_major_4.pdf}
-%      \centering
-%    \end{figure}
-%  \end{minipage}
-%  \tiny
-%  \begin{tablenotes}
-%  \item Notes;
-%    The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
-%    In the left figure, the outcome is the matriculation share to humanity major from each prefecture.
-%    In the right figure, the outcome is the matriculation share to science major from each prefecture.
-%    Rainfall and cumulated snow on the ground (both on the exam days and average for 10 days before the exam) are included in the regression.
-%    Each interval on the x-axis does not include the right end.
-%    The 90\% confidence intervals are shown.
-%    Prefecture fixed effects and year fixed effects are also included.
-%    Standard errors are clustered at the prefecture level.
-%  \end{tablenotes}
-%\end{frame}
+\begin{frame}\frametitle{Some additional analysis: Humanity vs. Science}
+  \begin{minipage}{0.49\textwidth}
+    \begin{center}
+      Humanity \\
+      (mean: 2.07 \%, median: 0.76 \%)
+    \end{center}
+    \begin{figure}[h]
+      \centering
+      \includegraphics[width = \textwidth]{../Output/images/reg_major_2.pdf}
+    \end{figure}
+  \end{minipage}
+  \begin{minipage}{0.49\textwidth}
+    \begin{center}
+      Science \\
+      (mean: 2.09 \%, median: 0.76 \%)
+    \end{center}
+    \begin{figure}[h]
+      \includegraphics[width = \textwidth]{../Output/images/reg_major_4.pdf}
+      \centering
+    \end{figure}
+  \end{minipage}
+  \tiny
+  \begin{tablenotes}
+  \item Notes;
+    The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
+    In the left figure, the outcome is the matriculation share to humanity major from each prefecture.
+    In the right figure, the outcome is the matriculation share to science major from each prefecture.
+    Rainfall and cumulated snow on the ground (both on the exam days and average for 10 days before the exam) are included in the regression.
+    Each interval on the x-axis does not include the right end.
+    The 90\% confidence intervals are shown.
+    Prefecture fixed effects and year fixed effects are also included.
+    Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{frame}
 
+\begin{frame}\frametitle{Conclusion}
+  \begin{itemize}
+    \item Weather on the exam dates affects the matriculations for UTokyo
+      \begin{itemize}
+        \item Reducing temperature from 3-6 \degree C to $<$0 \degree C decreases the probability of matriculation by 0.18 percentage point \\
+          (9\% of the average and 22\% of the median matriculation shares)
+        \item Snow on the ground cumulated more than 10cm decreases the probability of matriculation by 0.11 percentage point \\
+          (5\% of the average and 13\% of the median matriculation shares)
+      \end{itemize}
+    \item Suggests that the exam performance is negatively affected by winter weather
+    \item Implications for university admission process:
+      \begin{itemize}
+        \item Use other information such as extracurricular activities and personal statements for university admission?
+        \item Adjust weights for Center Test and the second-stage exam?
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\appendix
+
+\begin{frame}\frametitle{Temperature variations in each prefecture}
+  \label{temp_dev_1}
+  \begin{center}
+    \begin{figure}
+      %\caption{Map of matriculation shares (\%)}
+      \includegraphics[width=9.5cm]{../Output/images/temperature_diff.pdf}
+      \tiny
+      \begin{tablenotes}
+      \item Notes:
+        Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
+        Average across two test days in each year is shown in the figure.
+        The prefectures are ordered by the mean temperature across years (lowest to left and highest to right).
+      \end{tablenotes}
+    \end{figure}
+  \end{center}
+  \hyperlink{est_eq}{\beamergotobutton{Estimation equation}}
+\end{frame}
+
+\begin{frame}\frametitle{Deviation of temperatures from within-prefecture averages}
+  \label{temp_dev_2}
+  \begin{center}
+    \begin{figure}
+      %\caption{Map of matriculation shares (\%)}
+      \includegraphics[width=6.6cm]{../Output/images/temperature_diff_by_year.pdf}
+      \tiny
+      \begin{tablenotes}
+      \item Notes:
+        Temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test is used.
+        Deviations of average temperatures across two test days from their within-prefecture means are shown in the figure by year.
+        In each panel, red dots are the deviations in the year shown above and gray dots are the deviations in the other years.
+        The prefectures are ordered by the mean temperature across years (lowest to left and highest to right). \\
+      \item 
+        \hyperlink{est_eq}{\beamergotobutton{Estimation equation}}
+      \end{tablenotes}
+    \end{figure}
+  \end{center}
+\end{frame}
 
 
 \end{document}
