@@ -52,7 +52,7 @@
 
 %\usetheme{CambridgeUS}
 \setbeamertemplate{navigation symbols}{}
-\title[Temperature and Exam]{Winter weather on exam dates and matriculation for a prestigious university in Japan}
+\title[Temperature and Exam]{Winter weather on exam date and matriculation for a prestigious university in Japan}
 \author[Suzuki]{Mizuhiro Suzuki}
 \date{May 13th, 2021}
 
@@ -83,7 +83,7 @@
 
 \begin{frame}\frametitle{Background - Center Test}
   \begin{itemize}
-    \item In Japan, for public university admission, students need to take two exams:
+    \item In Japan, for public university admission, students need to take two exams
     \item First-stage: \textcolor{red}{Center Test}
       \begin{itemize}
         \item Held in mid-January (Saturday and Sunday)
@@ -96,7 +96,7 @@
       \end{itemize}
     \item Second-stage: University-specific exams
       \begin{itemize}
-        \item Universities hold exams typically in \textcolor{red}{late February} and/or mid-March
+        \item Public universities hold exams typically in \textcolor{red}{late February} and/or mid-March
         \item Students take the exams at universities they apply for
       \end{itemize}
   \end{itemize}
@@ -180,6 +180,7 @@
         The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
         Average of the shares across years is shown in the map.
         Although not shown in the legend due to the lack of the space, the lightest color in the map means the matriculation share between 0 to 0.5\% 
+        The darkest prefecture in the east part of Japan is Tokyo.
       \end{tablenotes}
     \end{figure}
   \end{center}
@@ -209,7 +210,7 @@
         \item 3-$\degree$C intervals
         \item Average across two exam dates in $j$ in year $t$
       \end{itemize}
-    \item $X_{jt}$: other weather variables such as rainfall, snowfall, and cumulated snow on the ground on exam dates
+    \item $X_{jt}$: other weather variables such as rainfall, snowfall, and cumulated snow on the ground on exam date
     \item $\mu_j$: prefecture fixed effects
     \item $\tau_t$: year fixed effects
     \item $\epsilon_{jt}$: error term
@@ -228,7 +229,6 @@
       \item Notes:
         The figure shows the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
         I use temperature at prefecture capitals between 6 AM and 6 PM on days of Center Test.
-        Each interval on the x-axis does not include the right end.
         The 90\% confidence intervals are shown.
         Prefecture fixed effects and year fixed effects are also included.
         Standard errors are clustered at the prefecture level.
@@ -256,86 +256,228 @@
 \end{frame}
 
 \begin{frame}\frametitle{Placebo test (including temperature one year after the exams)}
-  \begin{minipage}{0.49\textwidth}
-    \begin{center}
-      Contemporaneous temperature
-    \end{center}
-    \begin{figure}[h]
-      \centering
-      \includegraphics[width = \textwidth]{../Output/images/reg_placebo_exam_4.pdf}
-    \end{figure}
-  \end{minipage}
-  \begin{minipage}{0.49\textwidth}
-    \begin{center}
-      Temperature one year later
-    \end{center}
-    \begin{figure}[h]
-      \includegraphics[width = \textwidth]{../Output/images/reg_placebo_f1_4.pdf}
-      \centering
-    \end{figure}
-  \end{minipage}
-  \tiny
-  \begin{tablenotes}
-  \item Notes;
-    The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
-    In the left figure, the estimates on the contemporaneous temperature bins are shown.
-    In the right figure, the estimates on the temperature one year later are shown.
-    Rainfall and cumulated snow on the ground (both contemporaneous and one year later) are included in the regression.
-    Each interval on the x-axis does not include the right end.
-    The 90\% confidence intervals are shown.
-    Prefecture fixed effects and year fixed effects are also included.
-    Standard errors are clustered at the prefecture level.
-  \end{tablenotes}
+  \begin{figure}
+    \begin{minipage}{0.49\textwidth}
+      \begin{center}
+        Contemporaneous temperature
+      \end{center}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width = \textwidth]{../Output/images/reg_placebo_exam_4.pdf}
+      \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+      \begin{center}
+        Temperature one year later
+      \end{center}
+      \begin{figure}[h]
+        \includegraphics[width = \textwidth]{../Output/images/reg_placebo_f1_4.pdf}
+        \centering
+      \end{figure}
+    \end{minipage}
+    \tiny
+    \begin{tablenotes}
+    \item Notes;
+      The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
+      In the left figure, the estimates on the contemporaneous temperature bins are shown.
+      In the right figure, the estimates on the temperature one year later are shown.
+      Rainfall and cumulated snow on the ground (both contemporaneous and one year later) are included in the regression.
+      The 90\% confidence intervals are shown.
+      Prefecture fixed effects and year fixed effects are also included.
+      Standard errors are clustered at the prefecture level.
+    \end{tablenotes}
+  \end{figure}
 \end{frame}
 
 \begin{frame}\frametitle{Cognitive performance at the exam vs. Preparation \\ {\small Temperature on the exam date matters}}
-  \begin{minipage}{0.43\textwidth}
-    \begin{center}
-      Temperature at the exam dates
-    \end{center}
-    \begin{figure}[h]
-      \centering
-      \includegraphics[width = \textwidth]{../Output/images/reg_pre10_exam_4.pdf}
-    \end{figure}
-  \end{minipage}
-  \begin{minipage}{0.43\textwidth}
-    \begin{center}
-      Average temperature for 10 days before the exam
-    \end{center}
-    \begin{figure}[h]
-      \includegraphics[width = \textwidth]{../Output/images/reg_pre10_pre10_4.pdf}
-      \centering
-    \end{figure}
-  \end{minipage}
-  \tiny
-  \begin{tablenotes}
-  \item Notes;
-    The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
-    In the left figure, the estimates on the temperature on the exam dates are shown.
-    In the right figure, the estimates on the average temperature for 10 days before the exam are shown.
-    Rainfall and cumulated snow on the ground (both on the exam days and average for 10 days before the exam) are included in the regression.
-    Each interval on the x-axis does not include the right end.
-    The 90\% confidence intervals are shown.
-    Prefecture fixed effects and year fixed effects are also included.
-    Standard errors are clustered at the prefecture level.
-  \end{tablenotes}
-\end{frame}
-
-\begin{frame}\frametitle{{\normalsize Effects of other weather variables on the matriculation shares (\%)} \\ {\small Cumulated snow on the exam date matters}}
-  \begin{table}[h]
-    \Wider[4em]{
+  \begin{figure}
     \center
-    \fontsize{7}{5}\selectfont
-    \input{../Output/tex/reg_pre10_beamer.tex}
+    \begin{minipage}{0.43\textwidth}
+      \begin{center}
+        Temperature on the exam date \smallskip
+      \end{center}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width = \textwidth]{../Output/images/reg_pre10_exam_4.pdf}
+      \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.43\textwidth}
+      \begin{center}
+        Average temperature for 10 days before the exam
+      \end{center}
+      \begin{figure}[h]
+        \includegraphics[width = \textwidth]{../Output/images/reg_pre10_pre10_4.pdf}
+        \centering
+      \end{figure}
+    \end{minipage}
     \tiny
     \begin{tablenotes}
-    \item 
-      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
-      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+    \item Notes;
+      The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
+      In the left figure, the estimates on the temperature on the exam date are shown.
+      In the right figure, the estimates on the average temperature for 10 days before the exam are shown.
+      Rainfall and cumulated snow on the ground (both on the exam days and average for 10 days before the exam) are included in the regression.
+      The 90\% confidence intervals are shown.
+      Prefecture fixed effects and year fixed effects are also included.
       Standard errors are clustered at the prefecture level.
     \end{tablenotes}
-  }
-  \end{table}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Additional analyses}
+  \begin{itemize}
+    \item Take population into account for the outcome variable:
+      \begin{equation*}
+        \frac{\text{\# matriculations for UTokyo from $j$ in year $t$}}{\text{Population (million) in $j$ in year $t$}}
+      \end{equation*}
+    \item Weather variables
+      \begin{itemize}
+        \item Average between 6AM and 6PM was used
+        \item See the effects of weather between 6AM-9AM (morning) and 9AM-6PM (during exam) separately
+      \end{itemize}
+    \item Male vs. Female
+      \begin{itemize}
+        \item Women are more sensitive to temperature changes?
+      \end{itemize}
+    \item Humanity vs. Science
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Some additional analysis: Matriculation per population}
+  \begin{figure}
+    \begin{minipage}{0.44\textwidth}
+      \begin{center}
+        Matriculation per pop. (total) \\ (mean: 17.3)
+      \end{center}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width = \textwidth]{../Output/images/per_pop_reg_2.pdf}
+      \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.44\textwidth}
+      \begin{center}
+        Matriculation per pop. (15-19-year-old) (mean: 361)
+      \end{center}
+      \begin{figure}[h]
+        \includegraphics[width = \textwidth]{../Output/images/per_pop_reg_4.pdf}
+        \centering
+      \end{figure}
+    \end{minipage}
+    \tiny
+    \begin{tablenotes}
+    \item Notes;
+      The figures show the regression coefficients of the matriculation for UTokyo (\%) per population on temperature bins.
+      In the left figure, the matriculation per population (million) is used as an outcome.
+      In the right figure, the matriculation per 15-19-year-old population (million) is used as an outcome.
+      Rainfall and cumulated snow on the ground on the exam date are included in the regression.
+      Prefecture fixed effects and year fixed effects are also included.
+      The 90\% confidence intervals are shown.
+      Standard errors are clustered at the prefecture level.
+    \end{tablenotes}
+  \end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Some additional analysis: Matriculation per population \\ Placebo test (oh no!)}
+  \begin{figure}
+    \begin{minipage}{0.44\textwidth}
+      \begin{center}
+        Matriculation per pop. (total) \\ (contemporaneous temp.)
+      \end{center}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width = \textwidth]{../Output/images/per_pop_reg_t.pdf}
+      \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.44\textwidth}
+      \begin{center}
+        Matriculation per pop. (total) (temp. one year after)
+      \end{center}
+      \begin{figure}[h]
+        \includegraphics[width = \textwidth]{../Output/images/per_pop_reg_f1.pdf}
+        \centering
+      \end{figure}
+    \end{minipage}
+    \tiny
+    \begin{tablenotes}
+    \item Notes;
+      The figures show the regression coefficients of the matriculation for UTokyo (\%) per population (total, million) on temperature bins.
+      In the left figure, the estimates on the contemporaneous temperature bins are shown.
+      In the right figure, the estimates on the temperature one year later are shown.
+      Rainfall and cumulated snow on the ground on the exam date are included in the regression.
+      Prefecture fixed effects and year fixed effects are also included.
+      The 90\% confidence intervals are shown.
+      Standard errors are clustered at the prefecture level.
+    \end{tablenotes}
+  \end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Some additional analysis: Population \\ Temperature on exam date affects population...?}
+  \begin{figure}
+    \begin{minipage}{0.44\textwidth}
+      \begin{center}
+        Total population (million) \\ (contemporaneous temp.)
+      \end{center}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width = \textwidth]{../Output/images/pop_reg_t.pdf}
+      \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.44\textwidth}
+      \begin{center}
+        Total population (million) \\ (temp. one year after)
+      \end{center}
+      \begin{figure}[h]
+        \includegraphics[width = \textwidth]{../Output/images/pop_reg_f1.pdf}
+        \centering
+      \end{figure}
+    \end{minipage}
+    \tiny
+    \begin{tablenotes}
+    \item Notes;
+      The figures show the regression coefficients of the population (total, million) on temperature bins.
+      In the left figure, the estimates on the contemporaneous temperature bins are shown.
+      In the right figure, the estimates on the temperature one year later are shown.
+      Rainfall and cumulated snow on the ground on the exam date are included in the regression.
+      Prefecture fixed effects and year fixed effects are also included.
+      The 90\% confidence intervals are shown.
+      Standard errors are clustered at the prefecture level.
+    \end{tablenotes}
+  \end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{{\normalsize Some additional analysis: Temperature in the morning vs. during exam} \\ {\small Temperature in the morning matters more, maybe?}}
+  \begin{figure}
+    \begin{minipage}{0.44\textwidth}
+      \begin{center}
+        Temperature in the morning \\ (6AM - 9AM)
+      \end{center}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width = \textwidth]{../Output/images/morning_exam_reg_6_morning.pdf}
+      \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.44\textwidth}
+      \begin{center}
+        Temperature during exam \\ (9AM - 6PM)
+      \end{center}
+      \begin{figure}[h]
+        \includegraphics[width = \textwidth]{../Output/images/morning_exam_reg_6_exam.pdf}
+        \centering
+      \end{figure}
+    \end{minipage}
+    \tiny
+    \begin{tablenotes}
+    \item Notes;
+      The figures show the regression coefficients of the matriculation shares for UTokyo (\%) on temperature bins.
+      In the left figure, the estimates on the temperature (average between 6AM and 9AM) bins are shown.
+      In the right figure, the estimates on the temperature (average between 9AM and 6PM) bins are shown.
+      Rainfall and cumulated snow on the ground (both in the morning and during exam) are included in the regression.
+      The 90\% confidence intervals are shown.
+      Prefecture fixed effects and year fixed effects are also included.
+      Standard errors are clustered at the prefecture level.
+    \end{tablenotes}
+  \end{figure}
 \end{frame}
 
 \begin{frame}\frametitle{Some additional analysis: Female vs. Male \\ {\small Female students are less affected by temperature\dots or maybe not?}}
@@ -368,7 +510,6 @@
       In the left figure, the outcome is the matriculation share of female students from each prefecture.
       In the right figure, the outcome is the matriculation share of male students from each prefecture.
       Rainfall and cumulated snow on the ground (both on the exam days and average for 10 days before the exam) are included in the regression.
-      Each interval on the x-axis does not include the right end.
       The 90\% confidence intervals are shown.
       Prefecture fixed effects and year fixed effects are also included.
       Standard errors are clustered at the prefecture level.
@@ -406,7 +547,6 @@
       In the left figure, the outcome is the matriculation share to humanity major from each prefecture.
       In the right figure, the outcome is the matriculation share to science major from each prefecture.
       Rainfall and cumulated snow on the ground (both on the exam days and average for 10 days before the exam) are included in the regression.
-      Each interval on the x-axis does not include the right end.
       The 90\% confidence intervals are shown.
       Prefecture fixed effects and year fixed effects are also included.
       Standard errors are clustered at the prefecture level.
@@ -417,7 +557,7 @@
 \begin{frame}
   \frametitle{Conclusion}
   \begin{itemize}
-    \item Weather on the exam dates affects the matriculations for UTokyo
+    \item Weather on the exam date affects the matriculations for UTokyo
       \begin{itemize}
         \item A decrease in temperature from 3-6 \degree C to $<$0 \degree C decreases the probability of matriculation by 0.18 percentage points \\
           (9\% of the average and 22\% of the median matriculation shares)
@@ -476,6 +616,23 @@
       \end{tablenotes}
     \end{figure}
   \end{center}
+\end{frame}
+
+\begin{frame}\frametitle{{\normalsize Effects of other weather variables on the matriculation shares (\%)} \\ {\small Cumulated snow on the exam date, not before exams, matters}}
+  \begin{table}[h]
+    \Wider[4em]{
+    \center
+    \fontsize{7}{5}\selectfont
+    \input{../Output/tex/reg_pre10_beamer.tex}
+    \tiny
+    \begin{tablenotes}
+    \item 
+      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      Standard errors are clustered at the prefecture level.
+    \end{tablenotes}
+  }
+  \end{table}
 \end{frame}
 
 

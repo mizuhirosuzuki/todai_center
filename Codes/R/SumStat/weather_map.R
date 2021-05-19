@@ -39,9 +39,9 @@ map <- shapefile(
 )
 
 weather_df_avg <- weather_df %>% 
-  mutate(daytime_cum_snow_m = daytime_cum_snow_cm / 100) %>% 
+  mutate(daytime_cum_snow_cm = daytime_cum_snow_cm / 100) %>% 
   group_by(prefecture) %>% 
-  summarise_at(vars(daytime_temperature_degree, daytime_cum_snow_m), mean)
+  summarise_at(vars(daytime_temperature_degree, daytime_cum_snow_cm), mean)
 
 map@data$ADM1_JA <- str_replace(map@data$ADM1_JA, "県|府", "")
 map@data$ADM1_JA <- str_replace(map@data$ADM1_JA, "東京都", "東京")
@@ -80,7 +80,7 @@ png(file = filepath)
 print(
   spplot(
     map_avg, 
-    "daytime_cum_snow_m", 
+    "daytime_cum_snow_cm", 
     sp.layout = list(map_Japan, lwd = 0.1), 
     col.regions = brewer.pal(n = 7, name = "OrRd"),
     # cuts = 6,

@@ -1,6 +1,6 @@
 # Function to make estimates coefficient figures
 
-make_coef_figure <- function(res, temp_cut_str = "^temp_cut") {
+make_coef_figure <- function(res, temp_cut_str = "^temp_cut", ylim_lb = -0.40, ylim_ub = 0.40) {
 
   temp_cut_names <- grepl(temp_cut_str, rownames(res$coefficients))
 
@@ -35,18 +35,17 @@ make_coef_figure <- function(res, temp_cut_str = "^temp_cut") {
     ylab("Coefficients") +
     xlab("Temperature bins (Celsius)") +
     theme(axis.title = element_text(size = 15),
-          axis.text = element_text(size = 12)) +
+          axis.text = element_text(size = 15)) +
     scale_x_discrete(
       labels = expression(
         "" <= 0,
-        0-3,
-        3-6,
-        6-9,
+        "(0, 3]",
+        "(3, 6]",
+        "(6, 9]",
         "" > 9
       )
     ) +
-    ylim(-0.4, 0.48)
-
+    ylim(ylim_lb, ylim_ub)
   
   return(fig)
 }

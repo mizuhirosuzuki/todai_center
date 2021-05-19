@@ -47,8 +47,8 @@ list(
       admission_total_share,
       daytime_temperature_degree,
       daytime_precipitation_mm,
-      daytime_snowfall_m,
-      daytime_cum_snow_m
+      daytime_snowfall_cm,
+      daytime_cum_snow_cm
       ) %>% 
     summarise_all(x)
   ) %>% 
@@ -69,8 +69,8 @@ list(
     "Matriculation share (\\%)",
     "Temperature (\\degree C)",
     "Hourly precipitation (mm)",
-    "Hourly snowfall (m)",
-    "Cumulated snow (m)"
+    "Hourly snowfall (cm)",
+    "Cumulated snow (cm)"
   )) %>% 
   kbl("latex", booktabs = TRUE, escape = FALSE) %>% 
   add_header_above(

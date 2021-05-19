@@ -120,7 +120,7 @@ In Section \ref{sec:results}, I present the empirical results, and Section \ref{
 
 In Japan, for admission to public universities, students are usually required to take two exams.
 The first-stage test is Center Test.
-Students take an exam on consecutive two days (Saturday and Sunday) in mid-January.
+Students take an exam on two consecutive days (Saturday and Sunday) in mid-January.
 Most public universities, including UTokyo, require students to take exams on social science, Japanese, and English on the first day and mathematics and natural science on the second day.
 The exams start at 9:30 AM on both days and end at 6:10 PM on the first day and 5:50 PM on the second day.
 Questions are multiple-choice and common for all exam takers across Japan.
@@ -217,6 +217,7 @@ while the matriculation shares of the top 5 prefectures amount to more than 60\%
       The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
       Average of the shares across years is shown in the map.
       Although not shown in the legend due to the lack of the space, the lightest color in the map means the matriculation share between 0 to 0.5\% 
+      The darkest prefecture in the east part of Japan is Tokyo.
   \end{tablenotes}
 \end{figure}
 
@@ -290,7 +291,7 @@ Since neighboring prefectures are geographically close, I consider that the magn
 The main empirical results are provided in Table \ref{tab:main_reg}.
 The standard errors are clustered at the prefecture level.
 Without other weather variables, the estimates in column (1) show a negative and statistically significant impact of cold weather.
-Since the mean matriculation share is $2.08$\%, by reducing the temperature from the reference bin (between 3 and 6 $^o$C) to the lowest temperature bin (below 0 $^o$C), the matriculation share decreases by 9\%.
+Since the mean matriculation share is $2.08$\%, a decrease in the temperature from the reference bin (between 3 and 6 $^o$C) to the lowest temperature bin (below 0 $^o$C) results in the lower matriculation share by 9\%.
 Moreover, due to the stark skewness in the distribution of matriculation shares, the median matriculation share is $0.79$\%.
 Therefore, the same temperature change decreases the matriculation share by 22\% of the median value.
 
@@ -322,7 +323,7 @@ This indicates that the results in \ref{tab:main_reg} capture the effect of tran
       The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
       The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
       I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
-      Temperature intervals do not contain the right ends.
+      Temperature intervals do not contain the left ends.
       Standard errors are clustered at the prefecture level.
   \end{tablenotes}
 \end{table}
@@ -356,7 +357,7 @@ This suggests that the second mechanism is dominant.
       The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
       For weather variables with "(exam dates)", I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
       For weather variables with "(previous 10 days)", I use their averages at prefecture capitals between 10 days before and 1 day before the first day of Center Test.
-      Temperature intervals do not contain the right ends.
+      Temperature intervals do not contain the left ends.
       Standard errors are clustered at the prefecture level.
   \end{tablenotes}
 \end{table}
@@ -518,7 +519,7 @@ Given the importance of exam results for later life outcomes of students, it is 
       The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
       I use weather variables at prefecture capitals between 6 AM and 6 PM on days of Center Test.
       I represent the contemporaneous weather variables with ``($t$)'' and the weather one year after Center Test with ``($t + 1$).''
-      Temperature intervals do not contain the right ends.
+      Temperature intervals do not contain the left ends.
       Standard errors are clustered at the prefecture level.
   \end{tablenotes}
 \end{table}

@@ -1,50 +1,29 @@
-packages <- c(
-  "tidyverse",
-  "curl",
-  "rvest",
-  "magrittr",
-  "lubridate",
-  "readxl",
-  "lfe",
-  "stargazer"
-)
-pacman::p_load(packages, character.only = TRUE)
-
-dropbox_dir <- "~/Dropbox/todai_center/"
-git_dir <- "~/Documents/GitHub/todai_center/"
-
-# Load regression data =================
-reg_df <- readRDS(file.path(dropbox_dir, "Data/temp/data_regression.rds"))
-
-# Import function to make estimate figures
-source(file.path(git_dir, "Codes/R/Regression/make_coef_figure.R"))
-
 # Placebo regression with lead weather =====================
 
 res_1 <- felm(
-  admission_total_share ~ f1_temp_cut + f1_precipitation_mm + f1_snowfall_m |
+  admission_total_share ~ f1_temp_cut + f1_precipitation_mm + f1_snowfall_cm |
     prefecture + year | 0 | prefecture, 
   data = reg_df
   )
 
 res_2 <- felm(
-  admission_total_share ~ f1_temp_cut + f1_precipitation_mm + f1_cum_snow_m |
+  admission_total_share ~ f1_temp_cut + f1_precipitation_mm + f1_cum_snow_cm |
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
 res_3 <- felm(
   admission_total_share ~ 
-    temp_cut + daytime_precipitation_mm + daytime_snowfall_m +
-    f1_temp_cut + f1_precipitation_mm + f1_snowfall_m |
+    temp_cut + daytime_precipitation_mm + daytime_snowfall_cm +
+    f1_temp_cut + f1_precipitation_mm + f1_snowfall_cm |
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
 res_4 <- felm(
   admission_total_share ~ 
-    temp_cut + daytime_precipitation_mm + daytime_cum_snow_m +
-    f1_temp_cut + f1_precipitation_mm + f1_cum_snow_m |
+    temp_cut + daytime_precipitation_mm + daytime_cum_snow_cm +
+    f1_temp_cut + f1_precipitation_mm + f1_cum_snow_cm |
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
@@ -59,15 +38,15 @@ list(res_1, res_2, res_3, res_4) %>%
       "Temperature (\\degree C) 6-9 ($t$)",
       "Temperature (\\degree C) $>$ 9 ($t$)",
       "Rainfall (mm) ($t$)",
-      "Snowfall (m) ($t$)",
-      "Cumulated snow (m) ($t$)",
+      "Snowfall (cm) ($t$)",
+      "Cumulated snow (cm) ($t$)",
       "Temperature (\\degree C) $\\le$ 0 ($t + 1$)",
       "Temperature (\\degree C) 0-3 ($t + 1$)",
       "Temperature (\\degree C) 6-9 ($t + 1$)",
       "Temperature (\\degree C) $>$ 9 ($t + 1$)",
       "Rainfall (mm) ($t + 1$)",
-      "Snowfall (m) ($t + 1$)",
-      "Cumulated snow (m) ($t + 1$)"
+      "Snowfall (cm) ($t + 1$)",
+      "Cumulated snow (cm) ($t + 1$)"
     ),
     title = "",
     add.lines = list(

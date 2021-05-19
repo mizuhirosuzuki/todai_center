@@ -26,12 +26,12 @@ prefecture_order <- loc_df$prefecture
 
 weather_df_avg <- weather_df %>% 
   mutate(
-    daytime_cum_snow_m = daytime_cum_snow_cm / 100,
-    daytime_snowfall_m = daytime_snowfall_cm / 100,
+    daytime_cum_snow_cm = daytime_cum_snow_cm / 100,
+    daytime_snowfall_cm = daytime_snowfall_cm / 100,
     ) %>% 
   group_by(prefecture, exam_year, exam_month) %>% 
   summarise_at(
-    vars(daytime_temperature_degree, daytime_cum_snow_m, daytime_snowfall_m, daytime_precipitation_mm), 
+    vars(daytime_temperature_degree, daytime_cum_snow_cm, daytime_snowfall_cm, daytime_precipitation_mm), 
     mean
     ) %>% 
   mutate(prefecture = rev(factor(prefecture, levels = prefecture_order)))
@@ -129,12 +129,12 @@ ggsave(
 # Daytime cumulated snow
 prefecture_order <- weather_df_avg %>% 
   group_by(prefecture) %>% 
-  summarise_at(vars(daytime_cum_snow_m), mean, na.rm = TRUE) %>% 
-  arrange(daytime_cum_snow_m) %>% 
+  summarise_at(vars(daytime_cum_snow_cm), mean, na.rm = TRUE) %>% 
+  arrange(daytime_cum_snow_cm) %>% 
   .$prefecture %>% 
   as.vector()
 p <- weather_df_avg %>% 
-  ggplot(aes(x = prefecture, y = daytime_cum_snow_m, color = factor(exam_year))) +
+  ggplot(aes(x = prefecture, y = daytime_cum_snow_cm, color = factor(exam_year))) +
   geom_point() +
   scale_x_discrete(limits = prefecture_order) +
   scale_color_brewer(
@@ -165,12 +165,12 @@ ggsave(
 # Daytime snowfall
 prefecture_order <- weather_df_avg %>% 
   group_by(prefecture) %>% 
-  summarise_at(vars(daytime_snowfall_m), mean, na.rm = TRUE) %>% 
-  arrange(daytime_snowfall_m) %>% 
+  summarise_at(vars(daytime_snowfall_cm), mean, na.rm = TRUE) %>% 
+  arrange(daytime_snowfall_cm) %>% 
   .$prefecture %>% 
   as.vector()
 p <- weather_df_avg %>% 
-  ggplot(aes(x = prefecture, y = daytime_snowfall_m, color = factor(exam_year))) +
+  ggplot(aes(x = prefecture, y = daytime_snowfall_cm, color = factor(exam_year))) +
   geom_point() +
   scale_x_discrete(limits = prefecture_order) +
   scale_color_brewer(

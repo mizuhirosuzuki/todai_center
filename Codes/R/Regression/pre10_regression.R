@@ -1,50 +1,29 @@
-packages <- c(
-  "tidyverse",
-  "curl",
-  "rvest",
-  "magrittr",
-  "lubridate",
-  "readxl",
-  "lfe",
-  "stargazer"
-)
-pacman::p_load(packages, character.only = TRUE)
-
-dropbox_dir <- "~/Dropbox/todai_center/"
-git_dir <- "~/Documents/GitHub/todai_center/"
-
-# Load regression data =================
-reg_df <- readRDS(file.path(dropbox_dir, "Data/temp/data_regression.rds"))
-
-# Import function to make estimate figures
-source(file.path(git_dir, "Codes/R/Regression/make_coef_figure.R"))
-
 # Regression with weather for the previous 10 days =====================
 
 res_1 <- felm(
-  admission_total_share ~ temp_cut_pre10 + precipitation_pre10_sum + snowfall_pre10_m |
+  admission_total_share ~ temp_cut_pre10 + precipitation_pre10_sum + snowfall_pre10 |
     prefecture + year | 0 | prefecture, 
   data = reg_df
   )
 
 res_2 <- felm(
-  admission_total_share ~ temp_cut_pre10 + precipitation_pre10_sum + cum_snow_pre10_m |
+  admission_total_share ~ temp_cut_pre10 + precipitation_pre10_sum + cum_snow_pre10 |
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
 res_3 <- felm(
   admission_total_share ~ 
-    temp_cut + daytime_precipitation_mm + daytime_snowfall_m +
-    temp_cut_pre10 + precipitation_pre10_sum + snowfall_pre10_m |
+    temp_cut + daytime_precipitation_mm + daytime_snowfall_cm +
+    temp_cut_pre10 + precipitation_pre10_sum + snowfall_pre10 |
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
 res_4 <- felm(
   admission_total_share ~ 
-    temp_cut + daytime_precipitation_mm + daytime_cum_snow_m +
-    temp_cut_pre10 + precipitation_pre10_sum + cum_snow_pre10_m |
+    temp_cut + daytime_precipitation_mm + daytime_cum_snow_cm +
+    temp_cut_pre10 + precipitation_pre10_sum + cum_snow_pre10 |
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
@@ -59,15 +38,15 @@ list(res_1, res_2, res_3, res_4) %>%
       "Temperature (\\degree C) 6-9 (exam dates)",
       "Temperature (\\degree C) $>$ 9 (exam dates)",
       "Rainfall (mm) (exam dates)",
-      "Snowfall (m) (exam dates)",
-      "Cumulated snow (m) (exam dates)",
+      "Snowfall (cm) (exam dates)",
+      "Cumulated snow (cm) (exam dates)",
       "Temperature (\\degree C) $\\le$ 0 (previous 10 days)",
       "Temperature (\\degree C) 0-3 (previous 10 days)",
       "Temperature (\\degree C) 6-9 (previous 10 days)",
       "Temperature (\\degree C) $>$ 9 (previous 10 days)",
       "Rainfall (mm) (previous 10 days)",
-      "Snowfall (m) (previous 10 days)",
-      "Cumulated snow (m) (previous 10 days)"
+      "Snowfall (cm) (previous 10 days)",
+      "Cumulated snow (cm) (previous 10 days)"
     ),
     title = "",
     add.lines = list(
@@ -90,11 +69,11 @@ list(res_1, res_2, res_3, res_4) %>%
     ),
     covariate.labels = c(
       "Rainfall (mm) (exam dates)",
-      "Snowfall (m) (exam dates)",
-      "Cumulated snow (m) (exam dates)",
+      "Snowfall (cm) (exam dates)",
+      "Cumulated snow (cm) (exam dates)",
       "Rainfall (mm) (previous 10 days)",
-      "Snowfall (m) (previous 10 days)",
-      "Cumulated snow (m) (previous 10 days)"
+      "Snowfall (cm) (previous 10 days)",
+      "Cumulated snow (cm) (previous 10 days)"
     ),
     title = "",
     add.lines = list(

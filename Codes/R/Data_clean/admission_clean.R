@@ -71,12 +71,12 @@ load_admission_df <- function(file_path, year) {
     dplyr::select(- c(
       admission_male_Arts, admission_male_Sciences, 
       admission_female_Arts, admission_female_Sciences, 
-      admission_total_Arts, admission_total_Sciences
+      # admission_total_Arts, admission_total_Sciences
       )) %>% 
     filter(prefecture != "その他") %>% 
     mutate(
       across(
-        .cols = starts_with("admission_"),
+        .cols = (starts_with("admission_") & ends_with("_share")),
         .fns = ~ . * 100
       )
     ) %>% 
@@ -123,5 +123,49 @@ admission_df_all <- bind_rows(
   )
 )
 
+admission_df_all <- admission_df_all %>% 
+  mutate(admission_total = admission_total_Arts + admission_total_Sciences) %>% 
+  left_join(
+    read_csv(file.path(dropbox_dir, "Data/population_data.csv")),
+    by = c("prefecture", "year")
+  ) %>% 
+  group_by(prefecture) %>% 
+  mutate(
+    avg_total_pop = mean(total_pop),
+    avg_pop_15_19 = mean(pop_15_19)
+    ) %>% 
+  mutate(
+    admission_per_pop = admission_total / total_pop,
+    admission_per_pop_15_19 = admission_total / pop_15_19,
+    admission_per_avg_pop = admission_total / avg_total_pop,
+    admission_per_avg_pop_15_19 = admission_total / avg_pop_15_19
+  ) 
+
 write_csv(admission_df_all, file.path(dropbox_dir, "Data/admission_data.csv"))
 
+goopy
+
+admission_df_all %>% 
+  # filter(prefecture %in% aa[1:10]) %>% 
+  group_by(prefecture) %>% 
+  mutate(dev = (admission_total_share - mean(admission_total_share))) %>% 
+  # mutate(dev = (admission_total_share - mean(admission_total_share)) / sd(admission_total_share)) %>% 
+  ggplot(aes(x = prefecture_eng, y = dev, color = factor(year))) +
+  geom_point() +
+  scale_x_discrete(
+    limits = admission_df_all %>% 
+        group_by(prefecture_eng) %>% 
+        summarise_at(vars(admission_total), sd) %>% 
+        arrange(admission_total) %>% 
+        .$prefecture_eng %>% 
+        as.vector
+  ) +
+  coord_flip()
+
+admission_df_all %>% 
+  # filter(prefecture %in% aa[1:10]) %>% 
+  group_by(prefecture_eng) %>% 
+  summarise_at(vars(admission_total), list(mean, sd)) %>% 
+  ggplot(aes(x = fn1, y = fn2)) +
+  geom_point() +
+  coord_flip()

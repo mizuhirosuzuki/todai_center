@@ -1,46 +1,25 @@
-packages <- c(
-  "tidyverse",
-  "curl",
-  "rvest",
-  "magrittr",
-  "lubridate",
-  "readxl",
-  "lfe",
-  "stargazer"
-)
-pacman::p_load(packages, character.only = TRUE)
-
-dropbox_dir <- "~/Dropbox/todai_center/"
-git_dir <- "~/Documents/GitHub/todai_center/"
-
-# Load regression data =================
-reg_df <- readRDS(file.path(dropbox_dir, "Data/temp/data_regression.rds"))
-
-# Import function to make estimate figures
-source(file.path(git_dir, "Codes/R/Regression/make_coef_figure.R"))
-
 # Regression by male and female matriculations =====================
 
 res_1 <- felm(
-  admission_female_share ~ temp_cut + daytime_precipitation_mm + daytime_snowfall_m | 
+  admission_female_share ~ temp_cut + daytime_precipitation_mm + daytime_snowfall_cm | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
   )
 
 res_2 <- felm(
-  admission_female_share ~ temp_cut + daytime_precipitation_mm + daytime_cum_snow_m | 
+  admission_female_share ~ temp_cut + daytime_precipitation_mm + daytime_cum_snow_cm | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
 
 res_3 <- felm(
-  admission_male_share ~ temp_cut + daytime_precipitation_mm + daytime_snowfall_m | 
+  admission_male_share ~ temp_cut + daytime_precipitation_mm + daytime_snowfall_cm | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
   )
 
 res_4 <- felm(
-  admission_male_share ~ temp_cut + daytime_precipitation_mm + daytime_cum_snow_m | 
+  admission_male_share ~ temp_cut + daytime_precipitation_mm + daytime_cum_snow_cm | 
     prefecture + year | 0 | prefecture, 
   data = reg_df
 )
@@ -54,9 +33,9 @@ list(res_1, res_2, res_3, res_4) %>%
       "Temperature (\\degree C) $>$ 6, $\\le$ 9",
       "Temperature (\\degree C) $>$ 9",
       "Rainfall (mm)",
-      "Snowfall (m)",
-      "Cumulated snow (m)",
-      "Cumulated snow $>$ .10 m"
+      "Snowfall (cm)",
+      "Cumulated snow (cm)",
+      "Cumulated snow $>$ 10 cm"
     ),
     title = "",
     add.lines = list(

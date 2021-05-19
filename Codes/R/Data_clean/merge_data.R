@@ -8,7 +8,8 @@ packages <- c(
   "lubridate",
   "readxl",
   "lfe",
-  "stargazer"
+  "stargazer",
+  "RStata"
 )
 pacman::p_load(packages, character.only = TRUE)
 
