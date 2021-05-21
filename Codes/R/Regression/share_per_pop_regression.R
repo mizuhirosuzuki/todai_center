@@ -487,4 +487,5 @@ ggsave(
 
 reg_df %>% 
   group_by(prefecture) %>% 
-  summarise_at(vars(admission_total_share), mean)
+  summarise_at(vars(admission_total_share), mean) %>% 
+  View
