@@ -1,7 +1,7 @@
 # Main regression ==========================
 
 res_1 <- felm(
-  admission_total_share ~ temp_cut | 
+  admission_total_share ~ temp_cut |
     prefecture + year | 0 | prefecture, 
   data = reg_df
   )

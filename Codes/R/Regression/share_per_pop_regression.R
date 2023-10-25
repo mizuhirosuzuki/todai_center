@@ -489,3 +489,19 @@ reg_df %>%
   group_by(prefecture) %>% 
   summarise_at(vars(admission_total_share), mean) %>% 
   View
+
+
+felm(
+  admission_total_share ~ 
+    temp_cut + daytime_precipitation_mm + daytime_snowfall_cm +
+        f1_temp_cut + f1_precipitation_mm + f1_snowfall_cm | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+  ) %>% 
+  summary
+
+reg_df %>% 
+  group_by(prefecture) %>% 
+  summarise_at(vars(admission_total_share), mean) %>% 
+  arrange(desc(admission_total_share))
+
