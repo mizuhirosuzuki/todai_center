@@ -11,8 +11,9 @@ packages <- c(
 )
 pacman::p_load(packages, character.only = TRUE)
 
-dropbox_dir <- "~/Dropbox/todai_center/"
-git_dir <- "~/Documents/GitHub/todai_center/"
+args <- commandArgs(trailingOnly = TRUE)
+dropbox_dir <- args[1]
+git_dir <- args[2]
 
 # Download weather data
 # source(file.path(git_dir, "Codes/R/Data_clean/weather_download.R"))

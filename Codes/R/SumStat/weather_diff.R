@@ -1,27 +1,8 @@
-packages <- c(
-  "tidyverse",
-  "curl",
-  "rvest",
-  "magrittr",
-  "lubridate",
-  "readxl",
-  "grid",
-  "gridExtra",
-  "cowplot",
-  "lfe",
-  "stargazer",
-  "kableExtra"
-)
-pacman::p_load(packages, character.only = TRUE)
-
-dropbox_dir <- "~/Dropbox/todai_center/"
-git_dir <- "~/Documents/GitHub/todai_center/"
-
 # Load weather information =================
-weather_df <- read_csv(file.path(dropbox_dir, "Data/temp/weather_on_exam_day.csv"))
+weather_df <- read_csv(file.path(dropbox_dir, "Data/Processed/weather_on_exam_day.csv"))
 
 # Load location information
-loc_df <- read_delim(file.path(dropbox_dir, "Data/weather_station_id.txt"), delim = ",")
+loc_df <- read_delim(file.path(dropbox_dir, "Data/Raw/weather_station/weather_station_id.txt"), delim = ",")
 prefecture_order <- loc_df$prefecture
 
 weather_df_avg <- weather_df %>% 
