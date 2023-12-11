@@ -22,7 +22,11 @@ reg_df <- left_join(
 
 list(
   function(x) sum(!is.na(x)), 
-  mean, sd, median, min, max
+  function(x) mean(x, na.rm = TRUE),
+  function(x) sd(x, na.rm = TRUE),
+  function(x) median(x, na.rm = TRUE),
+  function(x) min(x, na.rm = TRUE),
+  function(x) max(x, na.rm = TRUE)
   ) %>% 
   map(
   function(x) 
