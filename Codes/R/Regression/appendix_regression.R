@@ -1,3 +1,54 @@
+# Appendix ==============
+# Table A.1
+# Regression with linear specification ==========================
+
+res_1 <- felm(
+  admission_total_share ~ daytime_temperature_degree | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+  )
+
+res_2 <- felm(
+  admission_total_share ~ daytime_temperature_degree + daytime_precipitation_mm + daytime_snowfall_cm | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+  )
+
+res_3 <- felm(
+  admission_total_share ~ daytime_temperature_degree + daytime_precipitation_mm + daytime_cum_snow_cm | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+  )
+
+res_4 <- felm(
+  admission_total_share ~ daytime_temperature_degree + daytime_precipitation_mm + factor(daytime_cum_snow_m > .1) | 
+    prefecture + year | 0 | prefecture, 
+  data = reg_df
+)
+
+list(res_1, res_2, res_3, res_4) %>% 
+  stargazer(
+    dep.var.labels = "Matriculation share (\\%)",
+    covariate.labels = c(
+      "Temperature (\\degree C)",
+      "Rainfall (mm)",
+      "Snowfall (cm)",
+      "Cumulated snow (cm)",
+      "Cumulated snow $>$ 10 cm"
+    ),
+    title = "",
+    add.lines = list(
+      c("Prefecture FE", rep("Yes", 8)),
+      c("Year FE", rep("Yes", 8))
+    ),
+    type = "latex",
+    out = file.path(git_dir, "Output/tex/linear_reg.tex"),
+    omit.stat = c("adj.rsq", "ser", "rsq"),
+    digits = 2,
+    float = FALSE
+  )
+
+# Table A.2
 # Placebo regression with lead weather =====================
 
 res_1 <- felm(
@@ -59,29 +110,4 @@ list(res_1, res_2, res_3, res_4) %>%
     digits = 2,
     float = FALSE
   )
-
-# Non-linear regression figures ============
-
-walk2(
-  list(res_1, res_2, res_3, res_4),
-  seq(1, 4), 
-  ~ ggsave(
-    filename = file.path(git_dir, str_interp("Output/images/reg_placebo_f1_${.y}.pdf")),
-    plot = make_coef_figure(.x, temp_cut_str = "^f1_temp_cut"),
-    height = 6,
-    width = 6
-    )
-  )
-
-walk2(
-  list(res_3, res_4),
-  seq(3, 4), 
-  ~ ggsave(
-    filename = file.path(git_dir, str_interp("Output/images/reg_placebo_exam_${.y}.pdf")),
-    plot = make_coef_figure(.x, temp_cut_str = "^temp_cut"),
-    height = 6,
-    width = 6
-    )
-  )
-
 

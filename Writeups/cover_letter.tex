@@ -1,0 +1,131 @@
+\documentclass{jourcl}
+
+% Path to your logo
+%\ImagePath{imgs/jourcl-logo.png}
+% Path to your signature (if you have one). 
+\signaturePath{signature.png}
+
+% recommended Editors / Reviewers -- change according to your data
+%----------------------------------------------------------------------
+
+% If you have recommended Editors / Reviewers
+% Example 
+
+%----------------------------------------------------------------------
+% Your data
+%----------------------------------------------------------------------
+% change according to your data
+\NameSurname{Mizuhiro Suzuki}
+% Orcid ID of author
+%\AuthorOrcid{0000-000=-0000-0000}
+% name of the institution
+\InstitutionName{Capital One}
+% address 1 - street name and house number
+%\StreetNo{}
+% address 2 - postal code, city, country
+%\CityPostal{Postal City, Country}
+% email of author
+\Email{mizuhiro.suzuki@gmail.com}
+% phone of author
+\Phone{+16086289083}
+
+%----------------------------------------------------------------------
+% Article data
+%----------------------------------------------------------------------
+% journal name
+\JournalName{Journal of the Japanese and International Economies}
+% title of your paper
+\Title{Winter weather on exam dates and matriculation for a prestigious university in Japan}
+% name of the EiC
+\Editor{Prof. Name Surname}
+% TODO make this optional
+\SpecialIssue{SI 2022}
+% abstract of the submitted Article
+\abstract{\lipsum[1]}
+
+%----------------------------------------------------------------------
+% Cover letter main part
+%----------------------------------------------------------------------
+% No need to change the following part - here for customization
+
+% Custom "To the editor: Editor Name"
+\toEditor{To the editor: \pEditor}
+
+% Addressing the Person
+\PersonAddressing{Dear Editor}
+
+% introduction
+\Introduction{
+I with to submit my paper titled: \pTitle, which I would like to be considered for publication in \pJournalName.
+I confirm that this work is original and has not been published elsewhere, nor is it currently under consideration for publication elsewhere.
+}
+
+% ending
+\final{We believe that an interesting new perspective created by our paper would deserve the attention of a broad economics audience. We hope that the manuscript will find your interest and that you will consider it for publication in \pJournalName.}
+
+% original work declaration
+\declaration{This manuscript is the author's original work and has not been published nor has it been submitted simultaneously elsewhere.}
+
+% no conflicts of interest
+\conflictofinterest{We have no conflicts of interest to disclose.}
+
+% change valediction in \valediction{ \OPTION_HERE } or \valediction{ Custom text }
+% \yoursfaithfully % In case we do not know the name of the Editor
+% \yourssincerely % In case we know the name of the Editor
+% \yourstruly % American version of Yours faithfully
+% \bestregards
+\valediction{\yourssincerely}
+
+\signature{\pNameSurname}
+
+% In this part you can change the position of reviewers
+%----------------------------------------------------------------------
+% Render document
+%----------------------------------------------------------------------
+\begin{document}
+
+\large % Font size
+\aboutme{
+    \pNameSurname \\
+    \pInstitutionName\\
+    \pEmail \\
+    \faIcon{phone-square-alt} \pPhone
+    }
+%----------------------------------------------------------------------
+
+\noindent\makebox[\linewidth]{\rule{0.9\paperwidth}{0.4pt}}
+
+% Today's date
+\today
+
+%\ptoEditor
+
+\vspace*{1\baselineskip}
+\pPersonAddressing,
+
+\pIntroduction
+
+In this paper, I examine the impact of winter cold weather on exam takers' performance in a high-stakes setting.
+Although the negative effect of heat on cognitive performance in high-stakes exams has been investigated in the literature, the effect of low temperature has not been explored.
+This paper examines the effect of temperature on days of a nationwide centralized test, called the National Center Test for University Admission, on exam takers' performance.
+To overcome the lack of exam score data, I use the matriculation to the most prestigious university in Japan, the University of Tokyo, as an outcome.
+I find that low temperature and snow cumulated on the ground reduce matriculation shares for the most prestigious university in Japan, the University of Tokyo.
+
+\pfinal\newline
+
+%\pdeclaration \newline
+
+\pconflictofinterest 
+
+Thank you for your consideration of this manuscript.
+
+\vspace{1cm}
+
+\pvalediction\par
+
+\psignature
+
+% Next line shows your signature. Comment it out if you don't have one / plan to use digital on .pdf
+\showSignature{\pSignaturePath}
+
+\end{document}

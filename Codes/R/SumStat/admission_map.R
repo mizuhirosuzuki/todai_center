@@ -1,40 +1,18 @@
-packages <- c(
-  "rgdal",
-  "sp",
-  "raster",
-  "tidyverse",
-  "curl",
-  "rvest",
-  "magrittr",
-  "lubridate",
-  "readxl",
-  "lfe",
-  "stargazer",
-  "RColorBrewer",
-  "kableExtra",
-  "classInt"
-)
-pacman::p_load(packages, character.only = TRUE)
-
-dropbox_dir <- "~/Dropbox/todai_center/"
-git_dir <- "~/Documents/GitHub/todai_center/"
-
 # Load admission information =================
-admission_df <- read_csv(file.path(dropbox_dir, "Data/admission_data.csv"))
+admission_df <- read_csv(file.path(dropbox_dir, "Data/Processed/admission_data.csv"))
 
 # Draw map of average admission shares  ===============
-
 map_Japan <- shapefile(
   file.path(
     dropbox_dir,
-    "Data/shapefile",
+    "Data/Raw/shapefile",
     "jpn_admbnda_adm0_2019.shp"
   )
 )
 map <- shapefile(
   file.path(
     dropbox_dir,
-    "Data/shapefile",
+    "Data/Raw/shapefile",
     "jpn_admbnda_adm1_2019.shp"
   )
 )
@@ -55,10 +33,7 @@ print(
     map_avg, 
     "admission_total_share", 
     sp.layout = list(map_Japan, lwd = 0.1), 
-    # col.regions = brewer.pal(n = 10, name = "OrRd"),
-    # at = classIntervals(map_avg$admission_total_share, n = 9, style = "quantile", intervalClosure = "right")$brks,
     col.regions = brewer.pal(n = 9, name = "OrRd"),
-    # cuts = 8,
     at = c(0, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0, 40.0),
     par.settings = list(axis.line = list(col = "transparent")),
     colorkey = list(

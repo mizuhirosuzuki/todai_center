@@ -1,24 +1,8 @@
-packages <- c(
-  "tidyverse",
-  "curl",
-  "rvest",
-  "magrittr",
-  "lubridate",
-  "readxl",
-  "lfe",
-  "stargazer",
-  "kableExtra"
-)
-pacman::p_load(packages, character.only = TRUE)
-
-dropbox_dir <- "~/Dropbox/todai_center/"
-git_dir <- "~/Documents/GitHub/todai_center/"
-
 # Load admission information =================
-admission_df <- read_csv(file.path(dropbox_dir, "Data/admission_data.csv"))
+admission_df <- read_csv(file.path(dropbox_dir, "Data/Processed/admission_data.csv"))
 
 # Load weather information =================
-weather_df <- read_csv(file.path(dropbox_dir, "Data/temp/weather_on_exam_day.csv"))
+weather_df <- read_csv(file.path(dropbox_dir, "Data/Processed/weather_on_exam_day.csv"))
 
 # Regression with average weather =====================
 
@@ -77,19 +61,3 @@ list(
     c(" ", "N", "Mean", "SD", "Median", "Min", "Max")
   ) %>% 
   save_kable(file.path(git_dir, "Output/tex/sum_stat.tex"))
-
-# list(
-#   function(x) sum(!is.na(x)), 
-#   mean, sd, median, min, max
-#   ) %>% 
-#   map(
-#   function(x) 
-#     reg_df %>% 
-#     dplyr::select(
-#       admission_Arts_share,
-#       admission_Sciences_share,
-#       ) %>% 
-#     summarise_all(x)
-#   ) %>% 
-#   bind_rows() 
-
