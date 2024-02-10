@@ -24,6 +24,38 @@ weather_hour_output <- weather_hour_df %>%
       ),
     by = c("prefecture", "year", "month", "day")
   ) %>% 
+  left_join(
+    weather_hour_df %>% 
+      filter(hour >= 6, hour <= 9) %>% 
+      group_by(prefecture, year, month, day) %>% 
+      summarise_at(
+          vars(temperature_degree, precipitation_mm, snowfall_cm, cum_snow_cm),
+          mean, na.rm = TRUE
+      ) %>% 
+      rename(
+        morning_temperature_degree = temperature_degree,
+        morning_precipitation_mm = precipitation_mm,
+        morning_snowfall_cm = snowfall_cm,
+        morning_cum_snow_cm = cum_snow_cm
+      ),
+    by = c("prefecture", "year", "month", "day")
+  ) %>% 
+  left_join(
+    weather_hour_df %>% 
+      filter(hour >= 10, hour <= 18) %>% 
+      group_by(prefecture, year, month, day) %>% 
+      summarise_at(
+          vars(temperature_degree, precipitation_mm, snowfall_cm, cum_snow_cm),
+          mean, na.rm = TRUE
+      ) %>% 
+      rename(
+        exam_temperature_degree = temperature_degree,
+        exam_precipitation_mm = precipitation_mm,
+        exam_snowfall_cm = snowfall_cm,
+        exam_cum_snow_cm = cum_snow_cm
+      ),
+    by = c("prefecture", "year", "month", "day")
+  ) %>% 
   group_by(prefecture, year, month) %>% 
   arrange(day, .by_group = TRUE) %>% 
   mutate(exam_first_second = row_number()) %>% 

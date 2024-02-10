@@ -84,6 +84,11 @@ Students take the exam on the same dates in mid-January in their prefectures.\fo
 }
 This creates a variation in weather to which they are exposed on the exam dates.
 
+Not only low temperature but also snow can negatively affect students' performance.
+Snow-covered roads can reduce students' body temperature on their way to exam sites.
+Furthermore, snow can delay public transportation, which can impose an additional mental burden on exam takers.
+This manuscript considers the effect of snow in the empirical analyses as well.
+
 Unlike the settings in the previous studies looking at the heat effects on exam scores, the score data of individual exam takers or even the aggregated exam score information are not easily accessible to researchers.
 To overcome this limitation, I use the weather on the dates of the Center Test and investigate its effect on matriculation for the University of Tokyo (UTokyo henceforth).
 UTokyo is a national university known to be the most prestigious in Japan.\footnote{
@@ -92,9 +97,16 @@ UTokyo is a national university known to be the most prestigious in Japan.\footn
 }
 This allows me to attribute a reduction in matriculation shares to the worse exam performance, instead of the better performance, which could induce students to choose better universities.
 
+In admission for UTokyo, scores at the Center Test are used for two purposes.
+First, the scores are used for eligibility to take the second-stage exam.
+Thresholds varying across years and majors are set, and if scores at the Center Test are below the thresholds, the students cannot take the second-stage exam.
+Secondly, the scores at the Center Test are taken into consideration for admission.
+The final score of a student is calculated by the weighted sum of exam scores at the first- and second-stage exams.
+Through both of these channels, the cold and snowy weather on exam days can affect the admission for UTokyo.
+
 The econometric analyses show that low temperature and snow cumulated on the ground on exam dates reduce the matriculation share.
 The estimates are not only statistically but also economically significant.
-Changing the temperature on the exam dates from 3-6 $^o$C to below 0 $^o$C decreases the matriculation share by 0.18\%, which amounts to 9\% of the average or 22\% of the median matriculation shares.
+Changing the temperature on the exam dates from 3-6 $^o$C to below 0 $^o$C decreases the matriculation share by 0.18 percentage points, which amounts to 9\% of the average or 22\% of the median matriculation shares.
 %The results provide implications for effective measures to be taken to mitigate the negative impact of winter weather.
 %These include preparing waiting rooms for exam takers to warm up to equalize their pre-exam conditions or adjusting the importance of the scores at the Center Test in the admissions process.
 
@@ -113,8 +125,14 @@ In Section \ref{sec:results}, I present the empirical results, and Section \ref{
 I use two sets of data: weather and matriculation for UTokyo.
 For weather information, I obtain data from \Citeauthor{jma}.
 Their website maintains the past weather across Japan.
-Based on hourly weather on exam dates in prefecture capitals, I use average weather between 6 AM and 6 PM.
+Based on hourly weather on exam dates in prefecture capitals, I use average weather between 6 AM and 6 PM across both exam days.\footnote{
+  Later in the paper, I also discuss the analyses using average weather on the first and second exam days separately.
+}
 Prefecture capitals tend to be the most populated in each prefecture, and highly-ranked high schools from which many students go to UTokyo are likely to be located in prefecture capitals.
+
+I use the average between 6 AM and 6 PM to holistically consider the effect of temperature both during going to exam sites and during exam time.
+\citet{Heyes2019} point out the potential importance of temperature during commute on decision making of court judges, and temperature during exams can directly affect the cognitive ability of exam takers. 
+In the appendix, I investigate the differential impacts of temperature before the exam and during the exam.
 
 For matriculation information for UTokyo, I use University Basic Information by \Citeauthor{univ_info}.
 This data contains information from 2012 to 2020 on the number of matriculated students for each university by prefectures at which their high schools are located.
@@ -163,6 +181,9 @@ To allow for non-linear effects of temperature on the outcome, I use the 3-$^o$C
 %}
 Let $T_{jt}^k$ represent the $k$'th temperature bin.
 I also include other weather variables such as rainfall, snowfall, and cumulated snow on the ground on exam dates as a vector $X_{jt}$.
+This allows me to explore the distinct role in the winter weather's effect.
+For instance, low temperature primarily affects exam performance through lower body temperature.
+On the other hand, on top of the effect on body temperature, snow can affect public transportation to exam sites, which can impose more stress on exam takers.
 As fixed effects, prefecture fixed effects ($\mu_j$) and year fixed effects ($\tau_t$) are used.
 Finally, the error term is represented as $\epsilon_{jt}$.
 
@@ -200,7 +221,7 @@ As Figure \ref{fig:temperature_diff} shows, each prefecture experiences substant
 The main empirical results are provided in Table \ref{tab:main_reg}.
 Without other weather variables, the estimates in column (1) show a negative and statistically significant impact of cold weather.
 Since the mean matriculation share is $2.08$\%, a decrease in the temperature from the reference bin (between 3 and 6 $^o$C) to the lowest temperature bin (below 0 $^o$C) results in the lower matriculation share by 9\%.
-Moreover, due to the stark skewness in the distribution of matriculation shares, the median matriculation share is $0.79$\%.
+Moreover, due to the stark skewness in the distribution of matriculation shares, the median matriculation share is $0.76$\%.
 Therefore, the same temperature change decreases the matriculation share by 22\% of the median value.
 
 In column (2), I add rainfall and snowfall in the regressions.
@@ -237,6 +258,25 @@ The coefficients are statistically insignificant, which suggests that the effect
       Standard errors are clustered at the prefecture level.
   \end{tablenotes}
 \end{table}
+
+I further conduct the following sets of analyses.
+First, to explore the differential impacts of temperature and snow before and during exams, I run regressions with average weather variables between 6 AM and 9 AM and between 10 AM and 6 PM.
+The results are shown in Appendix Table \ref{tab:morning_exam_reg}.
+It suggests that the low temperature in the morning has a large impact on exam performance, while the point estimates of the effects are similar between the two weather measures.
+Note that the results need to be interpreted with caution due to the high correlation between the weather variables before and during exams.
+For example, the correlation between temperatures before and during exams is 0.87.
+
+I also conduct additional analyses on the differential impact of weather on the first and second days.
+The results are provided in Appendix Table \ref{tab:first_second_day_reg}.
+The weather on these two days has quantitatively similar impacts on the outcome.
+Note that since there is no subject-specific weight on Center Test scores, weathers on both days are equally important.
+Although Column (3) suggests that the cumulated snow on the first day is important, this needs to be interpreted cautiously since this variable is highly correlated between two days (the correlation coefficient is 0.99).
+
+Finally, I investigate if low temperature and snow have an interaction effect.
+For this, first I separate the analysis samples by whether snow is cumulated less than 10 cm or not.
+I also interact the temperature variables with an indicator for snow cumulated more than 10 cm in the regressions.
+The results are provided in Appendix Table \ref{tab:hetero_exam_reg}.
+Although the interpretation requires caution due to the small variation in temperature for observations with less snow cumulated, the estimates suggest that there is a limited interactive effect between temperature and snow.
 
 \section{Conclusion}\label{sec:conclusion}
 
@@ -364,6 +404,64 @@ The final score of a student is calculated by the weighted sum of exam scores at
       The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
       For weather variables with "(exam dates)", I use weather variables in prefecture capitals between 6 AM and 6 PM on days of the Center Test.
       For weather variables with "(previous 10 days)", I use their averages in prefecture capitals between 10 days before and 1 day before the first day of the Center Test.
+      Temperature intervals do not contain the left ends.
+      Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{table}
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Weather effect (morning vs during-exam)}
+  \resizebox{0.6\linewidth}{!}{
+  \input{"../Output/tex/morning_exam_reg.tex"}
+  }
+  \label{tab:morning_exam_reg}
+  \footnotesize
+  \begin{tablenotes}
+    \item 
+      Notes:
+      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      I use weather variables in prefecture capitals between 6 AM and 9 AM for morning variables and 10 AM to 6 PM for during-exam variables on days of the Center Test.
+      Temperature intervals do not contain the left ends.
+      Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{table}
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Weather effect (1st day vs 2nd day)}
+  \resizebox{0.6\linewidth}{!}{
+  \input{"../Output/tex/first_second_day_reg.tex"}
+  }
+  \label{tab:first_second_day_reg}
+  \footnotesize
+  \begin{tablenotes}
+    \item 
+      Notes:
+      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      I use weather variables in prefecture capitals between 6 AM and 6 PM on days of the Center Test.
+      Temperature intervals do not contain the left ends.
+      Standard errors are clustered at the prefecture level.
+  \end{tablenotes}
+\end{table}
+
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Weather effect (interaction between temperature and snow)}
+  \resizebox{0.6\linewidth}{!}{
+  \input{"../Output/tex/hetero_exam_reg.tex"}
+  }
+  \label{tab:hetero_exam_reg}
+  \footnotesize
+  \begin{tablenotes}
+    \item 
+      Notes:
+      The outcome variable is the matriculation shares (\%) for the University of Tokyo from each prefecture.
+      The matriculation share is calculated based on the ratio of the number of students from high schools in the prefecture to the total number of matriculation.
+      I use weather variables in prefecture capitals between 6 AM and 6 PM on days of the Center Test.
       Temperature intervals do not contain the left ends.
       Standard errors are clustered at the prefecture level.
   \end{tablenotes}
