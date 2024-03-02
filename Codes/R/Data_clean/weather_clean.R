@@ -1,6 +1,11 @@
 # Hourly weather ====================
 # Load data
-weather_hour_df <- read_csv(file.path(dropbox_dir, "Data/Raw/weather_hourly/all_weather_hour.csv"))
+weather_hour_df <- read_csv(
+  file.path(
+    dropbox_dir, 
+    "Data/Raw/weather_hourly/all_weather_hour.csv"
+  )
+)
 
 weather_hour_output <- weather_hour_df %>% 
   group_by(prefecture, year, month, day) %>% 

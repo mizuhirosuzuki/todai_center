@@ -60,8 +60,13 @@ reg_df <- reg_df %>%
       pivot_wider(
         id_cols = c(prefecture, exam_year),
         names_from = exam_first_second,
-        values_from = c(daytime_temperature_degree, daytime_precipitation_mm, daytime_snowfall_cm, daytime_cum_snow_cm)
-        ),
+        values_from = c(
+          daytime_temperature_degree, 
+          daytime_precipitation_mm, 
+          daytime_snowfall_cm, 
+          daytime_cum_snow_cm
+        )
+      ),
   by = c("prefecture", "year" = "exam_year")
   ) %>% 
   mutate(

@@ -2,7 +2,13 @@
 weather_df <- read_csv(file.path(dropbox_dir, "Data/Processed/weather_on_exam_day.csv"))
 
 # Load location information
-loc_df <- read_delim(file.path(dropbox_dir, "Data/Raw/weather_station/weather_station_id.txt"), delim = ",")
+loc_df <- read_delim(
+  file.path(
+    dropbox_dir, 
+    "Data/Raw/weather_station/weather_station_id.txt"
+  ), 
+  delim = ","
+)
 prefecture_order <- loc_df$prefecture
 
 weather_df_avg <- weather_df %>% 
@@ -12,7 +18,12 @@ weather_df_avg <- weather_df %>%
     ) %>% 
   group_by(prefecture, exam_year, exam_month) %>% 
   summarise_at(
-    vars(daytime_temperature_degree, daytime_cum_snow_cm, daytime_snowfall_cm, daytime_precipitation_mm), 
+    vars(
+      daytime_temperature_degree, 
+      daytime_cum_snow_cm, 
+      daytime_snowfall_cm, 
+      daytime_precipitation_mm
+    ), 
     mean
     ) %>% 
   mutate(prefecture = rev(factor(prefecture, levels = prefecture_order)))
@@ -64,7 +75,11 @@ temp_diff_list <- map(
   seq(2012, 2020),
   function(x) weather_df_avg %>% 
     group_by(prefecture) %>% 
-    mutate(daytime_temperature_degree = daytime_temperature_degree - mean(daytime_temperature_degree)) %>% 
+    mutate(
+      daytime_temperature_degree = (
+        daytime_temperature_degree - mean(daytime_temperature_degree)
+      )
+    ) %>% 
     ggplot(aes(
       x = prefecture, y = daytime_temperature_degree, color = (exam_year == x),
       alpha = (exam_year == x) * 1.0 + (exam_year != x) * 0.9
