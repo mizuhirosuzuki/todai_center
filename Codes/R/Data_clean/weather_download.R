@@ -1,5 +1,11 @@
 # Load location information
-loc_df <- read_delim(file.path(dropbox_dir, "Data/Raw/weather_station_id/weather_station_id.txt"), delim = ",")
+loc_df <- read_delim(
+  file.path(
+    dropbox_dir, 
+    "Data/Raw/weather_station_id/weather_station_id.txt"
+    ), 
+  delim = ","
+)
 
 exam_date <- c(
   "2012/1/14", "2012/1/15",

@@ -96,5 +96,6 @@ passwords.*
 password/
 passwords/
 
+/Others/**/*
 
 .Rproj.user

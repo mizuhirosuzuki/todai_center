@@ -1,6 +1,11 @@
 # Hourly weather ====================
 # Load data
-weather_hour_df <- read_csv(file.path(dropbox_dir, "Data/Raw/weather_hourly/all_weather_hour.csv"))
+weather_hour_df <- read_csv(
+  file.path(
+    dropbox_dir, 
+    "Data/Raw/weather_hourly/all_weather_hour.csv"
+  )
+)
 
 weather_hour_output <- weather_hour_df %>% 
   group_by(prefecture, year, month, day) %>% 
@@ -21,6 +26,38 @@ weather_hour_output <- weather_hour_df %>%
         daytime_precipitation_mm = precipitation_mm,
         daytime_snowfall_cm = snowfall_cm,
         daytime_cum_snow_cm = cum_snow_cm
+      ),
+    by = c("prefecture", "year", "month", "day")
+  ) %>% 
+  left_join(
+    weather_hour_df %>% 
+      filter(hour >= 6, hour <= 9) %>% 
+      group_by(prefecture, year, month, day) %>% 
+      summarise_at(
+          vars(temperature_degree, precipitation_mm, snowfall_cm, cum_snow_cm),
+          mean, na.rm = TRUE
+      ) %>% 
+      rename(
+        morning_temperature_degree = temperature_degree,
+        morning_precipitation_mm = precipitation_mm,
+        morning_snowfall_cm = snowfall_cm,
+        morning_cum_snow_cm = cum_snow_cm
+      ),
+    by = c("prefecture", "year", "month", "day")
+  ) %>% 
+  left_join(
+    weather_hour_df %>% 
+      filter(hour >= 10, hour <= 18) %>% 
+      group_by(prefecture, year, month, day) %>% 
+      summarise_at(
+          vars(temperature_degree, precipitation_mm, snowfall_cm, cum_snow_cm),
+          mean, na.rm = TRUE
+      ) %>% 
+      rename(
+        exam_temperature_degree = temperature_degree,
+        exam_precipitation_mm = precipitation_mm,
+        exam_snowfall_cm = snowfall_cm,
+        exam_cum_snow_cm = cum_snow_cm
       ),
     by = c("prefecture", "year", "month", "day")
   ) %>% 

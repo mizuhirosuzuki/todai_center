@@ -48,11 +48,10 @@ load_admission_df <- function(file_path, year) {
     mutate(admission_total = admission_male + admission_female) %>% 
     pivot_wider(names_from = department, values_from = starts_with("admission_")) %>% 
     mutate(
-      admission_male_share = (admission_male_Arts + admission_male_Sciences) / (sum(admission_total_Arts) + sum(admission_total_Sciences)),
-      admission_female_share = (admission_female_Arts + admission_female_Sciences) / (sum(admission_total_Arts) + sum(admission_total_Sciences)),
-      admission_Arts_share = (admission_male_Arts + admission_female_Arts) / sum(admission_total_Arts),
-      admission_Sciences_share = (admission_male_Sciences + admission_female_Sciences) / sum(admission_total_Sciences),
-      admission_total_share = (admission_total_Arts + admission_total_Sciences) / (sum(admission_total_Arts) + sum(admission_total_Sciences))
+      admission_total_share = (
+        (admission_total_Arts + admission_total_Sciences) / 
+        (sum(admission_total_Arts) + sum(admission_total_Sciences))
+      )
     ) %>% 
     filter(prefecture != "その他") %>% 
     mutate(
