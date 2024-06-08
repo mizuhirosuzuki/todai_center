@@ -1,6 +1,6 @@
 # GitHub repo for "Winter weather on exam dates and matriculation for a prestigious university in Japan"
 
-This repo stores codes for reproducing the result in my paper "Winter weather on exam dates and matriculation for a prestigious university in Japan".
+This repo stores codes for reproducing the result in my paper ["Winter weather on exam dates and matriculation for a prestigious university in Japan"](https://www.sciencedirect.com/science/article/abs/pii/S0165176524001149#:~:text=I%20find%20that%20low%20temperature,exam%20dates%20worsens%20exam%20performance.) published from Economics Letters.
 
 The R scripts for downloading the data, cleaning the data, and generating analysis results are in the `Codes/R` folder.
 
